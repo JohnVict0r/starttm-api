@@ -15,6 +15,10 @@
 
 const Route = use('Route')
 
+Route.get('/v1/', () => {
+  return { greeting: 'Hello world in JSON, Is The First Version of API ;P' }
+})
+
 Route.get('/', () => {
-  return { greeting: 'Hello world in JSON' }
+  return { tip: 'Go to /v1 in URL' }
 })
