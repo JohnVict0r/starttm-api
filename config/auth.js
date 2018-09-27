@@ -28,7 +28,7 @@ module.exports = {
   */
   session: {
     serializer: 'lucid',
-    model: 'App/v1/Models/User',
+    model: 'App/Models/User',
     scheme: 'session',
     uid: 'email',
     password: 'password'
@@ -87,8 +87,8 @@ module.exports = {
   api: {
     serializer: 'mongoose',
     scheme: 'api',
-    model: 'App/v1/Models/User',
-    token: 'App/v1/Models/Token',
+    model: 'App/Models/User',
+    token: 'App/Models/Token',
     uid: 'username', // The user identifier. Ej: email, username
     password: '', // Password field if using user-password validation
     expiry: '30d', // Not yet implemented

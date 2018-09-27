@@ -15,10 +15,6 @@
 
 const Route = use('Route')
 
-Route.get('/v1/', () => {
-  return { greeting: 'Hello world in JSON, Is The First Version of API ;P' }
-})
-
 Route.get('/', () => {
-  return { tip: 'Go to /v1 in URL' }
+  return { tip: 'Start TM API' }
 })
