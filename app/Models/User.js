@@ -38,4 +38,6 @@ class User extends BaseModel {
   }
 }
 
+/*teste*/
+
 module.exports = User.buildModel('User')
