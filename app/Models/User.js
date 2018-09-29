@@ -1,7 +1,7 @@
 'use strict'
 
-const BaseModel = use('MongooseModel')
-
+import BaseModel from 'adonis-mongoose-model/src/Model/Base';
+import { Schema } from 'mongoose';
 /**
  * @class User
  */
@@ -17,24 +17,25 @@ class User extends BaseModel {
    * User's schema
    */
   static get schema() {
-    return {
-      id: {
-        type: Number,
-        required: true,
+  
+    return new Schema(
+      {
+        email: {
+          type: String,
+          required: true,
+        },
+        login: {
+          type: String,
+          required: true,
+        },
+        password: {
+          type: String,
+          required: true,
+        }
       },
-      email: {
-        type: String,
-        required: true,
-      },
-      login: {
-        type: String,
-        required: true,
-      },
-      password:{
-        type: String,
-        required: true,
-      }
-    }
+      {
+        autoIndex : true,
+      });
   }
 }
 
