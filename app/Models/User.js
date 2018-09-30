@@ -17,24 +17,30 @@ class User extends BaseModel {
    * User's schema
    */
   static get schema() {
-  
-    return new Schema(
-      {
-        email: {
-          type: String,
-          required: true,
-        },
-        login: {
-          type: String,
-          required: true,
-        },
-        password: {
-          type: String,
-          required: true,
-        }
+
+    return new Schema({
+      email: {
+        type: String,
+        required: true,
       },
+      login: {
+        type: String,
+        required: true,
+      },
+      password: {
+        type: String,
+        required: true,
+      },
+      confirmationToken: {
+        type: String,
+      },
+      isActive: {
+        type: Boolean,
+        default: false,
+      }
+    },
       {
-        autoIndex : true,
+        autoIndex: true,
       });
   }
 }
