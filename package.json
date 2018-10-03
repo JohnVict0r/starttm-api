@@ -24,10 +24,11 @@
     "@adonisjs/framework": "^5.0.7",
     "@adonisjs/ignitor": "^2.0.6",
     "@adonisjs/lucid": "^5.0.4",
-    "adonis-mongoose-model": "^3.0.1",
-    "express": "^4.16.3"
+    "adonis-mongoose-model": "^3.0.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^1.18.4"
+  },
   "autoload": {
     "App": "./app"
   }
