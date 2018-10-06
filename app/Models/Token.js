@@ -1,8 +1,6 @@
 'use strict'
 
-import TokenMongoose from 'adonis-mongoose-model/src/Model/TokenMongoose';
-
-import { ObjectId } from 'mongoose';
+const TokenMongoose = require('AdonisMongoose/Src/Token');
 
 /**
  * @class Token

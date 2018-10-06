@@ -1,29 +1,23 @@
 'use strict'
 
-import BaseModel from 'adonis-mongoose-model/src/Model/Base';
-import { Schema } from 'mongoose';
+
+const BaseModel = use('MongooseModel');
+
 /**
  * @class User
  */
 class User extends BaseModel {
   static boot({ schema }) {
-    // Hooks:
-    // this.addHook('preSave', () => {})
-    // this.addHook('preSave', 'UserHook.method')
-    // Indexes:
-    // this.index({}, {background: true})
-  }
-  /**
-   * User's schema
-   */
-  static get schema() {
 
-    return new Schema({
+  }
+
+  static get schema() {
+    return {
       email: {
         type: String,
         required: true,
       },
-      login: {
+      username: {
         type: String,
         required: true,
       },
@@ -38,13 +32,8 @@ class User extends BaseModel {
         type: Boolean,
         default: false,
       }
-    },
-      {
-        autoIndex: true,
-      });
+    }
   }
 }
-
-/*teste*/
 
 module.exports = User.buildModel('User')
