@@ -3,25 +3,9 @@
 const Env = use('Env')
 
 module.exports = {
-  /*
-  |--------------------------------------------------------------------------
-  | Connection
-  |--------------------------------------------------------------------------
-  |
-  | Connection to be used for sending emails. Each connection needs to
-  | define a driver too.
-  |
-  */
+
   connection: Env.get('MAIL_CONNECTION', 'smtp'),
 
-  /*
-  |--------------------------------------------------------------------------
-  | SMTP
-  |--------------------------------------------------------------------------
-  |
-  | Here we define configuration for sending emails via SMTP.
-  |
-  */
   smtp: {
     driver: 'smtp',
     pool: true,

@@ -20,8 +20,6 @@ Route.get('/', () => {
   return { tip: 'Start TM API' }
 })
 
-
-
 Route.post("/register", "Auth/RegisterControlController.register");
 
 Route.get('/users', 'UserController.index');

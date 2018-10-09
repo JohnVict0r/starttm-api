@@ -2,31 +2,27 @@
 
 
 const User = use('App/Models/User');
+const Mail = use('Mail');
 
-const { validateAll } = use('Validator');
 const randomString = require('random-string');
 
 class RegisterControlController {
+    
+    // Register New User
+    async register({ request }) {
 
-    async register({ request, session, response }) {
-
-
-        const { username, email, password } = request.all();
-
-
-        const validation = await validateAll(request.all(), {
-            username: 'required',
-            email: 'required',
-            password: 'required',
-        })
-
-        if (validation.fails()) {
-            return { Error: "Validation Failed" };
-        }
+        let { username, email, password } = request.all();
 
         const user = await User.create({
             username, email, password,
-            confirmationToken: randomString({ lenght: 40 })
+            confirmationToken: randomString({ lenght: 50 })
+        });
+
+        await Mail.send('emails.signup', JSON.stringify(user), message => {
+            message
+                .to(user.email)
+                .from('hello@adonisjs.com')
+                .subject('Please confirm your email address')
         });
 
     }

@@ -1,11 +1,8 @@
 'use strict'
 
-
 const BaseModel = use('MongooseModel');
+const validator = use('App/Validators/User');
 
-/**
- * @class User
- */
 class User extends BaseModel {
   static boot({ schema }) {
 
@@ -16,10 +13,19 @@ class User extends BaseModel {
       email: {
         type: String,
         required: true,
+        unique: true,
+        lowercase: true,
+        validate: {
+          isAsync: true,
+          validator: validator.validateEmail,
+          message: 'Is not a valid email',
+
+        }
       },
       username: {
         type: String,
         required: true,
+        unique: true,
       },
       password: {
         type: String,
@@ -34,6 +40,7 @@ class User extends BaseModel {
       }
     }
   }
+
 }
 
 module.exports = User.buildModel('User')
