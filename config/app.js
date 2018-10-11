@@ -4,7 +4,6 @@ const Env = use('Env')
 
 module.exports = {
 
-
   name: Env.get('APP_NAME', 'AdonisJs'),
 
   appKey: Env.get('APP_KEY'),
@@ -23,19 +22,7 @@ module.exports = {
   },
 
   static: {
-    /*
-    |--------------------------------------------------------------------------
-    | Dot Files
-    |--------------------------------------------------------------------------
-    |
-    | Define how to treat dot files when trying to server static resources.
-    | By default it is set to ignore, which will pretend that dotfiles
-    | does not exists.
-    |
-    | Can be one of the following
-    | ignore, deny, allow
-    |
-    */
+
     dotfiles: 'ignore',
 
     /*

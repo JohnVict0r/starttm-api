@@ -19,7 +19,6 @@ class User extends BaseModel {
           isAsync: true,
           validator: validator.validateEmail,
           message: 'Is not a valid email',
-
         }
       },
       username: {
@@ -31,13 +30,6 @@ class User extends BaseModel {
         type: String,
         required: true,
       },
-      confirmationToken: {
-        type: String,
-      },
-      isActive: {
-        type: Boolean,
-        default: false,
-      }
     }
   }
 

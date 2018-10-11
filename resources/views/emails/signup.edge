@@ -1,4 +1,7 @@
-<h2> Hello</h2>
+<h2> Hello {{ username }}</h2>
 <p>
   Welcome to the startm, here's your getting started guide
+</p>
+<p>
+  <a href="{{'http://localhost:3333/register/confirm/'+ confirmationToken + '&' + username}}">Confirm Email</a>
 </p>

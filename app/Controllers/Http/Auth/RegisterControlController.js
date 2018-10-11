@@ -1,30 +1,40 @@
 'use strict'
 
 
+const UserRequest = use('App/Models/UserRequest');
 const User = use('App/Models/User');
 const Mail = use('Mail');
 
 const randomString = require('random-string');
 
 class RegisterControlController {
-    
+
     // Register New User
     async register({ request }) {
 
-        let { username, email, password } = request.all();
-
-        const user = await User.create({
-            username, email, password,
-            confirmationToken: randomString({ lenght: 50 })
+        const user = await UserRequest.create({
+            ...request.all(),
+            confirmationToken: randomString({ length: 50 })
         });
 
-        await Mail.send('emails.signup', JSON.stringify(user), message => {
+        let { confirmationToken, username } = user;
+
+        await Mail.send('emails.signup', { confirmationToken, username  }, message => {
             message
                 .to(user.email)
                 .from('hello@adonisjs.com')
                 .subject('Please confirm your email address')
         });
 
+    }
+
+    async confirmEmail({ params }) {
+
+        const userRequest = await UserRequest.findOne({ confirmationToken: params.token, username: params.username });
+
+        UserRequest.deleteOne({ confirmationToken: params.token, username: params.token });
+
+        await User.create({ ...userRequest });
     }
 
 
