@@ -1,6 +1,6 @@
 'use strict'
 
-const TokenMongoose = require('AdonisMongoose/Src/Token');
+const TokenMongoose = use('AdonisMongoose/Src/Token');
 
 /**
  * @class Token

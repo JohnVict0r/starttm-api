@@ -25,11 +25,20 @@ class User extends BaseModel {
         type: String,
         required: true,
         unique: true,
+        validate: {
+          isAsync: true,
+          validator: validator.validateUsername,
+          message: 'Its not a valid username',
+        }
       },
       password: {
         type: String,
         required: true,
       },
+      roles: {
+        type: [],
+        required: false,
+      }
     }
   }
 

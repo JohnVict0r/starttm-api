@@ -6,11 +6,9 @@ Route.get('/', () => {
   return { tip: 'Start TM API' }
 })
 
-Route.post("/register", "Auth/RegisterControlController.register");
-Route.get("/register/confirm/:token&:username", "Auth/RegisterControlController.confirmEmail")
+Route.post("/registration/request", "Auth/RegisterControlController.requestUser");
+Route.get("/registration/confirm/:token&:username", "Auth/RegisterControlController.confirmUser")
 
 Route.get('/users', 'UserController.index');
-Route.get('/Persons', 'PersonController.index');
+Route.get('/persons', 'PersonController.index');
 Route.get('/events', 'EventController.index');
-
-

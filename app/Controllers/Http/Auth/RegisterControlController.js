@@ -1,5 +1,6 @@
 'use strict'
 
+const NotFoundUserRequestException = use('App/Exceptions/NotFoundException');
 
 const UserRequest = use('App/Models/UserRequest');
 const User = use('App/Models/User');
@@ -9,8 +10,9 @@ const randomString = require('random-string');
 
 class RegisterControlController {
 
-    // Register New User
-    async register({ request }) {
+
+    // Request a new user
+    async requestUser({ request }) {
 
         const user = await UserRequest.create({
             ...request.all(),
@@ -19,7 +21,7 @@ class RegisterControlController {
 
         let { confirmationToken, username } = user;
 
-        await Mail.send('emails.signup', { confirmationToken, username  }, message => {
+        await Mail.send('emails.signup', { confirmationToken, username }, message => {
             message
                 .to(user.email)
                 .from('hello@adonisjs.com')
@@ -28,11 +30,14 @@ class RegisterControlController {
 
     }
 
-    async confirmEmail({ params }) {
-
+    // Create a new user
+    async confirmUser({ params }) {
         const userRequest = await UserRequest.findOne({ confirmationToken: params.token, username: params.username });
 
-        UserRequest.deleteOne({ confirmationToken: params.token, username: params.token });
+        if (!userRequest)
+            throw new NotFoundException('User request not found!', 11);
+
+        UserRequest.deleteOne(userRequest);
 
         await User.create({ ...userRequest });
     }
