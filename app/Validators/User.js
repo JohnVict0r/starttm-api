@@ -4,7 +4,7 @@ const { validate } = use('Validator');
 
 class User {
 
-    async validateEmail({ email }) {
+    async validateEmail( email) {
         let rules = {
             email: 'email|required'
         }
@@ -17,7 +17,7 @@ class User {
         return true;
     }
 
-    async validateUsername({ username }) {
+    async validateUsername(username) {
         let rules = {
             username: 'alpha_numeric',
         }

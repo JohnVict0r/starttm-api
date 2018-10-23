@@ -16,6 +16,10 @@ class Token extends TokenMongoose {
     // Edit your schema here
     return super.schema
   }
+
+  static getUserFields (type) {
+    return '_id email'
+  }
 }
 
 module.exports = Token.buildModel('Token')

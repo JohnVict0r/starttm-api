@@ -11,6 +11,7 @@ class UserRequest extends BaseModel {
         this.addHook('preSave', 'UserRequestHook.verifyDuplicateUser');
     }
 
+
     static get schema() {
         return {
             email: {

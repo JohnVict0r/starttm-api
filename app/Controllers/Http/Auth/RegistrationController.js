@@ -1,14 +1,12 @@
 'use strict'
 
-const NotFoundUserRequestException = use('App/Exceptions/NotFoundException');
-
 const UserRequest = use('App/Models/UserRequest');
 const User = use('App/Models/User');
 const Mail = use('Mail');
 
 const randomString = require('random-string');
 
-class RegisterControlController {
+class RegistrationController {
 
 
     // Request a new user
@@ -35,14 +33,16 @@ class RegisterControlController {
         const userRequest = await UserRequest.findOne({ confirmationToken: params.token, username: params.username });
 
         if (!userRequest)
-            throw new NotFoundException('User request not found!', 11);
+            throw new NotFoundException('Link not found', 11);
 
         UserRequest.deleteOne(userRequest);
 
-        await User.create({ ...userRequest });
+        let { password, username, email } = userRequest;
+
+        await User.create({ password, username, email });
     }
 
 
 }
 
-module.exports = RegisterControlController
+module.exports = RegistrationController

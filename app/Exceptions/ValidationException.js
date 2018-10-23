@@ -8,7 +8,7 @@ class ValidationException extends LogicalException {
 
     let message = error.errors[Object.keys(error.errors)[0]].message;
 
-    response.status(400).send('Bad Request: ' + message);
+    response.status(400).send(message);
     
   }
 }
