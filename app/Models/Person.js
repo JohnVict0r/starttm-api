@@ -1,6 +1,9 @@
 'use strict'
 
-const BaseModel = use('MongooseModel')
+const BaseModel = use('MongooseModel');
+const { Schema } = use('mongoose');
+
+const validator = user('App/Validators/Person');
 
 class Person extends BaseModel {
   static boot({ schema }) {
@@ -9,9 +12,11 @@ class Person extends BaseModel {
 
   static get schema() {
     return {
-      id_user: {
-        type: Number, //Number? Integer?
+      user: {
+        type: Schema.Types.ObjectId,
         required: true,
+        unique: true,
+        ref: 'User'
       },
       name: {
         type: String,
@@ -28,10 +33,12 @@ class Person extends BaseModel {
       rg: {
         type: String,
         required: false,
+      },
+      address: {
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref: 'Address'
       }
-
-      //Address?
-
     }
   }
 }

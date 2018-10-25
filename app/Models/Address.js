@@ -1,6 +1,7 @@
 'use strict'
 
-const BaseModel = use('MongooseModel')
+const BaseModel = use('MongooseModel');
+const validator = user('App/Validators/Address');
 
 class Address extends BaseModel {
   static boot({ schema }) {
@@ -16,7 +17,7 @@ class Address extends BaseModel {
       number: {
         type: Number,
         required: true,
-        minLength: 0,
+        min: 0,
       },
       neighborhood: {
         type: String,
@@ -36,7 +37,7 @@ class Address extends BaseModel {
         min: 0,
       },
       state: {
-      type: Number,
+        type: Number,
         required: true,
         min: 0,
       }
