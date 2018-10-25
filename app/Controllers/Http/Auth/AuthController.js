@@ -6,7 +6,7 @@ const Hash = use('Hash');
 
 const AuthenticationException = use('App/Exceptions/AuthenticationException');
 
-class AuthenticationController {
+class AuthController {
 
     // Login User
     async login({ request, auth, response }) {
@@ -33,4 +33,4 @@ class AuthenticationController {
     }
 }
 
-module.exports = AuthenticationController
+module.exports = AuthController

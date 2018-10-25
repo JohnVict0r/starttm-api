@@ -28,6 +28,7 @@
     "@adonisjs/mail": "^3.0.9",
     "@adonisjs/validator": "^5.0.4",
     "adonis-mongoose-model": "^3.0.1",
+    "md5": "^2.2.1",
     "random-string": "^0.2.0"
   },
   "devDependencies": {

@@ -6,9 +6,17 @@ Route.get('/', () => {
   return { tip: 'Start TM API' }
 })
 
-// Registration
-Route.post("/registration/request", "Auth/RegistrationController.requestUser");
-Route.get("/registration/confirm/:token&:username", "Auth/RegistrationController.confirmUser");
+// Auth
+Route.group(() => {
+
+  // Singup
+  Route.post("/singup", "Auth/SingupController.register");
+  Route.get("/confirm-email/:token", "Auth/SingupController.confirm");
+
+  // Auth
+  Route.post("/login", "Auth/AuthController.login");
+
+}).prefix('/auth');
 
 Route.group(() => {
 
@@ -16,4 +24,3 @@ Route.group(() => {
 }).middleware("auth"); 
 
 // Authentication
-Route.post("/login", "Auth/AuthenticationController.login");
