@@ -5,11 +5,11 @@ const { Schema } = use('Mongoose');
 
 const validator = use('App/Validators/User');
 
-class SingupRequest extends BaseModel {
+class SignupRequest extends BaseModel {
   static boot({ schema }) {
 
     this.index({ 'created_at': 1 }, { expireAfterSeconds: 30 });
-    this.addHook('preSave', 'SingupRequestHook.checkDuplicateUser');
+    this.addHook('preSave', 'SignupRequestHook.checkDuplicateUser');
 
   }
 
@@ -47,4 +47,4 @@ class SingupRequest extends BaseModel {
   }
 }
 
-module.exports = SingupRequest.buildModel('SingupRequest')
+module.exports = SignupRequest.buildModel('SignupRequest')

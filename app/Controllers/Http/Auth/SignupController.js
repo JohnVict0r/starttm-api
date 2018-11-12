@@ -2,23 +2,23 @@
 
 const md5 = require('md5');
 
-const SingupRequest = use('App/Models/Auth/SingupRequest');
+const SignupRequest = use('App/Models/Auth/SignupRequest');
 const User = use('App/Models/User');
 const Mail = use('Mail');
 
 const NotFoundEx = use('App/Exceptions/NotFoundException');
 
 
-class SingupController {
+class SignupController {
 
     async register({ request, response }) {
 
         let { username, email, password } = request.all();
         let token = md5(email + password + username);
 
-        let singup = await SingupRequest.create({ ...request.all(), token });
+        let signup = await SignupRequest.create({ ...request.all(), token });
 
-        await Mail.send('emails.singup', singup, (message) => {
+        await Mail.send('emails.signup', signup, (message) => {
             message
                 .to(email)
                 .from('starttm@account.com')
@@ -30,14 +30,14 @@ class SingupController {
 
     async confirm({ params, response }) {
 
-        let singup = await SingupRequest.findOne({ token: params.token });
+        let signup = await SignupRequest.findOne({ token: params.token });
 
-        if (!singup)
+        if (!signup)
             throw new NotFoundEx();
 
-        await SingupRequest.deleteOne({ token: params.token });
+        await SignupRequest.deleteOne({ token: params.token });
 
-        let { email, username, password } = singup;
+        let { email, username, password } = signup;
 
         await User.create({email, username, password});
 
@@ -45,4 +45,4 @@ class SingupController {
     }
 }
 
-module.exports = SingupController
+module.exports = SignupController

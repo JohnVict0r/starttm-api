@@ -10,17 +10,13 @@ Route.get('/', () => {
 Route.group(() => {
 
   // Singup
-  Route.post("/singup", "Auth/SingupController.register");
-  Route.get("/confirm-email/:token", "Auth/SingupController.confirm");
+  Route.post("/signup", "Auth/SignupController.register");
+  Route.get("/confirm-email/:token", "Auth/SignupController.confirm");
 
-  // Auth
-  Route.post("/login", "Auth/AuthController.login");
+});
 
-}).prefix('/auth');
 
 Route.group(() => {
 
 
-}).middleware("auth"); 
-
-// Authentication
+});

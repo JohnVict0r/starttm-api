@@ -3,7 +3,7 @@
 const { validate } = use('Validator');
 
 class Address {
-
+    
 
 }
 
