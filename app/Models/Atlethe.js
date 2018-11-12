@@ -5,7 +5,7 @@ const { Schema } = use('mongoose');
 
 class Atlethe extends BaseModel {
   static boot({ schema }) {
-
+  
   }
 
   static get schema() {
