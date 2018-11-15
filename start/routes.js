@@ -2,10 +2,6 @@
 
 const Route = use('Route')
 
-Route.get('/', () => {
-  return { tip: 'Start TM API' }
-})
-
 // Auth
 Route.group(() => {
 
@@ -13,10 +9,7 @@ Route.group(() => {
   Route.post("/signup", "Auth/SignupController.register");
   Route.get("/confirm-email/:token", "Auth/SignupController.confirm");
 
-});
+}); 
 
 
-Route.group(() => {
-
-
-});
+Route.resource('users', 'UserController').only('index');

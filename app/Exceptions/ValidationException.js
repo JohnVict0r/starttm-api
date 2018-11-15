@@ -6,9 +6,7 @@ class ValidationException extends LogicalException {
 
   handle(error, { response }) {
 
-    let message = error.errors[Object.keys(error.errors)[0]].message;
-
-    response.status(400).send(message);
+    response.status(400).send(error.message);
     
   }
 }

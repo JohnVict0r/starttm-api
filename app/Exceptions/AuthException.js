@@ -2,10 +2,10 @@
 
 const { LogicalException } = require('@adonisjs/generic-exceptions')
 
-class AuthenticationException extends LogicalException {
+class AuthException extends LogicalException {
   handle(error, { response }) {
     response.status(400).send(error.message);
   }
 }
 
-module.exports = AuthenticationException
+module.exports = AuthException
