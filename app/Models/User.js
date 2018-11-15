@@ -1,6 +1,8 @@
 'use strict'
 
 const BaseModel = use('MongooseModel');
+const { Schema } = use('Mongoose');
+
 const validator = use('App/Validators/User');
 
 class User extends BaseModel {
@@ -37,10 +39,11 @@ class User extends BaseModel {
         type: String,
         required: true,
       },
-      roles: {
-        type: [],
-        required: false,
-      }
+      roles: [{
+        type: Schema.Types.ObjectId,
+        unique: true,
+        ref: 'Role'
+      }]
     }
   }
 

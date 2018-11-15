@@ -25,6 +25,11 @@ class Person extends BaseModel {
       sex: {
         type: String,
         required: true,
+        enum: ['MALE', 'FEMALE']
+      },
+      birth:{
+        type: Date,
+        required: true,
       },
       cpf: {
         type: String,
