@@ -3,7 +3,7 @@
 const User = use('App/Models/User');
 const Role = use('App/Models/Role');
 
-const { userF, roleF } = use('App/Utils/ModelFilter');
+const { userF, roleF, filterDoc } = use('App/Utils/ModelFilter');
 const { AuthEx, NotFoundEx } = use('App/Exceptions');
 
 const Hash = use('Hash');
@@ -21,7 +21,7 @@ class UserController {
 
         if (!isCheck) throw new AuthEx('Incorret username or password.');
 
-        delete user._doc['password'];
+        user._doc = filterDoc(user._doc, userF);
 
         response.status(200).send(user);
     }

@@ -3,7 +3,7 @@
 const BaseModel = use('MongooseModel');
 const { Schema } = use('mongoose');
 
-const validator = user('App/Validators/Person');
+const validator = use('App/Validators/Person');
 
 class Person extends BaseModel {
   static boot({ schema }) {
@@ -34,18 +34,22 @@ class Person extends BaseModel {
       cpf: {
         type: String,
         required: true,
+        unique: true,
       },
       rg: {
         type: String,
-        required: false,
+        required: true,
+        unique: true,
       },
+      /*
       address: {
         type: Schema.Types.ObjectId,
         required: true,
         ref: 'Address'
       }
+      */
     }
   }
 }
 
-module.exports = Address.buildModel('Person')
+module.exports = Person.buildModel('Person')
