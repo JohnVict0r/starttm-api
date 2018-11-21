@@ -1,6 +1,6 @@
 const base = '-_id -__v -created_at -updated_at';
 
-const userF = base;
+const userF = base + ' -password';
 const roleF = base;
 const personF = base + ' -user';
 

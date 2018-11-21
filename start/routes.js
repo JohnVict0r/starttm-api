@@ -12,9 +12,14 @@ Route.group(() => {
 });
 
 // User
-Route.resource('users', 'UserController').only('index');
+Route.resource('users', 'UserController').only(['show', 'index']);
 
-// Person
-Route.resource('people', 'PersonController')
+// People
+Route.resource('users.people', 'PersonController')
   .apiOnly()
-  .except(['index', 'destroy']);
+  .except(['destroy']);
+
+// Arbiter
+Route.resource('users.arbiters', 'ArbiterController')
+  .apiOnly()
+  .except(['destroy']);

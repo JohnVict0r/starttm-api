@@ -41,13 +41,11 @@ class Person extends BaseModel {
         required: true,
         unique: true,
       },
-      /*
       address: {
         type: Schema.Types.ObjectId,
         required: true,
         ref: 'Address'
       }
-      */
     }
   }
 }

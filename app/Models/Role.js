@@ -5,7 +5,7 @@ const { Schema } = use('Mongoose');
 
 class Role extends BaseModel {
   static boot({ schema }) {
-    this.index({ user: 1, type: 1, active: 1 }, { background: true, unique: true });
+    this.index({ user: 1, type: 1, active: 1 }, { background: true, unique: true, sparse: true });
   }
 
   static get schema() {

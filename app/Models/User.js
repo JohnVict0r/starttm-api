@@ -39,16 +39,13 @@ class User extends BaseModel {
         type: String,
         required: true,
       },
-      person:{
-        type: Schema.Types.ObjectId,
-        unique: true,
-        ref: 'Person'
+      roles: {
+        type: [{
+          type: Schema.Types.ObjectId,
+          unique: true,
+          ref: 'Role'
+        }],
       },
-      roles: [{
-        type: Schema.Types.ObjectId,
-        unique: true,
-        ref: 'Role'
-      }]
     }
   }
 

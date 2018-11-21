@@ -3,25 +3,24 @@
 const User = use('App/Models/User');
 const Role = use('App/Models/Role');
 
-const { userF, roleF, filterDoc } = use('App/Utils/ModelFilter');
-const { AuthEx, NotFoundEx } = use('App/Exceptions');
+const { userF, roleF } = use('App/Utils/ModelFilter');
 
 const Hash = use('Hash');
 
 class UserController {
 
-    async index({ request, response }) {
-        const { email, password } = await request.all();
+    async index({ response }) {
 
-        let user = await User.findOne({ email }, userF).populate('roles', roleF);
+        let users = await User.find();
 
-        if (!user) throw new NotFoundEx("User not found.");
+        response.send(users);
+    }
 
-        let isCheck = await Hash.verify(password, user.password);
+    async show({ request, response }) {
 
-        if (!isCheck) throw new AuthEx('Incorret username or password.');
+        const { id } = await request.params;
 
-        user._doc = filterDoc(user._doc, userF);
+        let user = await User.findOne({ _id: id }, userF).populate('roles', roleF);
 
         response.status(200).send(user);
     }
