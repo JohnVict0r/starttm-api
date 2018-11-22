@@ -11,6 +11,9 @@ class PersonController {
 
     async index({ request, response }) {
 
+        const persons = await Person.find();
+
+        response.status(200).send(persons);
     }
 
     async show({ request, response }) {

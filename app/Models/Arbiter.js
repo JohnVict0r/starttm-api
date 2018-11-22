@@ -23,8 +23,6 @@ class Arbiter extends BaseModel {
         default: 0,
         min: 0
       }
-
-
     }
   }
 }

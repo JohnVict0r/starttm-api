@@ -16,6 +16,12 @@ class Coach extends BaseModel {
         unique: true,
         required: true,
         ref: 'User'
+      },
+      club: {
+        type: Schema.Types.ObjectId,
+        unique: true,
+        required: true,
+        ref: 'Club'
       }
     }
   }
