@@ -3,7 +3,7 @@
 const User = use('App/Models/User');
 const Role = use('App/Models/Role');
 
-const { userF, roleF } = use('App/Utils/ModelFilter');
+const { baseF } = use('App/Utils/ModelFilter');
 
 const Hash = use('Hash');
 
@@ -20,7 +20,7 @@ class UserController {
 
         const { id } = await request.params;
 
-        let user = await User.findOne({ _id: id }, userF).populate('roles', roleF);
+        let user = await User.findOne({ _id: id }, baseF).populate('roles', baseF);
 
         response.status(200).send(user);
     }

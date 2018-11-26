@@ -38,7 +38,6 @@ class Person extends BaseModel {
       },
       rg: {
         type: String,
-        required: true,
         unique: true,
       },
       address: {

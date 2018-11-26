@@ -1,9 +1,11 @@
-const base = '-_id -__v -created_at -updated_at';
+const baseF = '-_id -__v -created_at -updated_at -password';
 
-const userF = base + ' -password';
-const roleF = base;
-const personF = base + ' -user';
-const arbiterF = base;
+const userF = baseF + ' -roles';
+const roleF = baseF;
+const personF = baseF + ' -address -user';
+const arbiterF = baseF + ' -user';
+const atletheF = baseF + ' -user';
+const addressF = baseF;
 
 function filterDoc(doc, filter) {
 
@@ -15,4 +17,4 @@ function filterDoc(doc, filter) {
     return doc;
 }
 
-module.exports = { userF, roleF, personF, arbiterF, filterDoc };
+module.exports = { baseF, userF, roleF, personF, arbiterF, atletheF, addressF, filterDoc };

@@ -4,7 +4,8 @@ const User = use('App/Models/User');
 const Person = use('App/Models/Person');
 const Address = use('App/Models/Address')
 
-const { personF, filterDoc } = use('App/Utils/ModelFilter');
+const viaCEP = use('App/Utils/ViaCEP');
+const { baseF, personF, userF, addressF, filterDoc } = use('App/Utils/ModelFilter');
 
 class PersonController {
 
@@ -20,7 +21,9 @@ class PersonController {
 
         const { users_id, id } = request.params;
 
-        const person = await Person.findOne({ user: users_id, _id: id }, personF);
+        const person = await Person.findOne({ user: users_id, _id: id }, baseF)
+            .populate('address', addressF)
+            .populate('user', userF);
 
         response.status(200).send(person);
     }
@@ -30,17 +33,19 @@ class PersonController {
         const { users_id } = request.params;
         let data = request.only(['name', 'sex', 'birth', 'sex', 'cpf', 'rg', 'address']);
 
-        let address = new Address(data.address);
+
+        let address = await viaCEP.getAddress(data);
+        address = await Address.create(address);
         await address.validate();
 
         data.address = address._id;
-        
+
         let person = new Person({ user: users_id, ...data });
         await person.validate();
-        
+
         await address.save();
         await person.save();
-        
+
         person._doc = filterDoc(person._doc, personF);
 
         response.status(201).send();

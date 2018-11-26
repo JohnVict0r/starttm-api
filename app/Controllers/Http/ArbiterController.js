@@ -3,7 +3,7 @@
 const User = use('App/Models/User');
 const Arbiter = use('App/Models/Arbiter');
 
-const { arbiterF, userF, filterDoc } = use('App/Utils/ModelFilter');
+const { baseF, arbiterF, userF, filterDoc } = use('App/Utils/ModelFilter');
 
 class ArbiterController {
 
@@ -18,7 +18,7 @@ class ArbiterController {
 
         const { users_id, id } = request.params;
 
-        const arbiter = await Arbiter.findOne({ user: users_id, _id: id }, abriterF).populate('user', userF + ' -roles');
+        const arbiter = await Arbiter.findOne({ user: users_id, _id: id }, baseF).populate('user', userF);
 
         response.status(200).send(arbiter);
     }
@@ -32,12 +32,6 @@ class ArbiterController {
         arbiter._doc = filterDoc(arbiter._doc, arbiterF);
 
         response.status(200).send(arbiter);
-    }
-
-    async update({ request, response }) {
-
-        /* Analisar */
-
     }
 
 }

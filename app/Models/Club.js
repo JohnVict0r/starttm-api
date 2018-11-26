@@ -6,9 +6,7 @@ const { Schema } = use('Mongoose');
 class Club extends BaseModel {
 
     static boot({ schema }) {
-
-        this.index({ clubManager: 1, eventManager: 1 }, { background: true, unique: true });
-        
+        this.index({ clubManager: 1, eventManager: 1 }, { background: true, unique: true });        
     }
 
     static get schema() {

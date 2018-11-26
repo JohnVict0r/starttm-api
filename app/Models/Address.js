@@ -33,11 +33,9 @@ class Address extends BaseModel {
       },
       city: {
         type: String,
-        required: true,
       },
       state: {
         type: String,
-        required: true,
       }
 
     }

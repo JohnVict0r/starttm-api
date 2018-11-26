@@ -22,4 +22,4 @@ Route.resource('users.people', 'PersonController')
 // Arbiter
 Route.resource('users.arbiters', 'ArbiterController')
   .apiOnly()
-  .except(['destroy']);
+  .except(['destroy', 'update']);
