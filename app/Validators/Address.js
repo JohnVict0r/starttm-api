@@ -1,10 +1,5 @@
-'use strict'
-
 const { validate } = use('Validator');
 
-class Address {
-    
-
-}
+class Address {}
 
 module.exports = new Address();
