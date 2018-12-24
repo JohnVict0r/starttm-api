@@ -1,12 +1,10 @@
-'use strict'
 
-const BaseModel = use('MongooseModel')
+
+const BaseModel = use('MongooseModel');
 const { Schema } = use('mongoose');
 
 class Atlethe extends BaseModel {
-  static boot({ schema }) {
-  
-  }
+  static boot({ schema }) {}
 
   static get schema() {
     return {
@@ -14,7 +12,7 @@ class Atlethe extends BaseModel {
         type: Schema.Types.ObjectId,
         required: true,
         unique: true,
-        ref: 'User'
+        ref: 'User',
       },
       rating: {
         type: Number,
@@ -24,10 +22,10 @@ class Atlethe extends BaseModel {
         type: Number,
         required: true,
         min: 0,
-        max: 9
-      }
-    }
+        max: 9,
+      },
+    };
   }
 }
 
-module.exports = Atlethe.buildModel('Atlethe')
+module.exports = Atlethe.buildModel('Atlethe');

@@ -1,39 +1,32 @@
-'use strict'
+const { Arbiter } = require('../../Models');
 
-const User = use('App/Models/User');
-const Arbiter = use('App/Models/Arbiter');
-
-const { baseF, arbiterF, userF, filterDoc } = use('App/Utils/ModelFilter');
+const {
+  baseF, arbiterF, userF, filterDoc,
+} = use('App/Utils/ModelFilter');
 
 class ArbiterController {
+  async index({ response }) {
+    const arbiters = await Arbiter.find();
+    response.status(200).send(arbiters);
+  }
 
+  async show({ request, response }) {
+    const { users_id: user, id: _id } = request.params;
 
-    async index({ request, response }) {
+    const arbiter = await Arbiter.findOne({ user, _id }, baseF).populate('user', userF);
 
-        const arbiters = await Arbiter.find();
-        response.status(200).send(arbiters);
-    }
+    response.status(200).send(arbiter);
+  }
 
-    async show({ request, response }) {
+  async store({ request, response }) {
+    const { users_id: user } = request.params;
 
-        const { users_id, id } = request.params;
+    const arbiter = await Arbiter.create({ user });
 
-        const arbiter = await Arbiter.findOne({ user: users_id, _id: id }, baseF).populate('user', userF);
+    arbiter._doc = filterDoc(arbiter._doc, arbiterF);
 
-        response.status(200).send(arbiter);
-    }
-
-    async store({ request, response }) {
-
-        const { users_id } = request.params;
-
-        const arbiter = await Arbiter.create({ users_id });
-
-        arbiter._doc = filterDoc(arbiter._doc, arbiterF);
-
-        response.status(200).send(arbiter);
-    }
-
+    response.status(200).send(arbiter);
+  }
 }
 
-module.exports = ArbiterController
+module.exports = ArbiterController;

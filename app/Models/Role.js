@@ -1,6 +1,4 @@
-'use strict'
-
-const BaseModel = use('MongooseModel')
+const BaseModel = use('MongooseModel');
 const { Schema } = use('Mongoose');
 
 class Role extends BaseModel {
@@ -24,14 +22,21 @@ class Role extends BaseModel {
       type: {
         type: String,
         required: true,
-        enum: ['ATLETHE', 'COACH', 'ARBITER', 'FEDERATION_PRESIDENT', 'CLUB_PRESIDENT', 'EVENT_MANAGER']
+        enum: [
+          'ATLETHE',
+          'COACH',
+          'ARBITER',
+          'FEDERATION_PRESIDENT',
+          'CLUB_PRESIDENT',
+          'EVENT_MANAGER',
+        ],
       },
       active: {
         type: Boolean,
         default: true,
-      }
-    }
+      },
+    };
   }
 }
 
-module.exports = Role.buildModel('Role')
+module.exports = Role.buildModel('Role');

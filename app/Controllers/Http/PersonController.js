@@ -1,42 +1,31 @@
-"use strict";
+const { Person, Address } = use('App/Models/User');
 
-const User = use("App/Models/User");
-const Person = use("App/Models/Person");
-const Address = use("App/Models/Address");
+const viaCEP = require('../../Utils/ViaCEP');
 
-const viaCEP = use("App/Utils/ViaCEP");
-const { baseF, personF, userF, addressF, filterDoc } = use(
-  "App/Utils/ModelFilter"
-);
+const {
+  baseF, personF, userF, addressF, filterDoc,
+} = use('App/Utils/ModelFilter');
 
 class PersonController {
-  async index({ request, response }) {
+  async index({ response }) {
     const persons = await Person.find();
 
     response.status(200).send(persons);
   }
 
   async show({ request, response }) {
-    const { users_id, id } = request.params;
+    const { users_id: user, id: _id } = request.params;
 
-    const person = await Person.findOne({ user: users_id, _id: id }, baseF)
-      .populate("address", addressF)
-      .populate("user", userF);
+    const person = await Person.findOne({ user, _id }, baseF)
+      .populate('address', addressF)
+      .populate('user', userF);
 
     response.status(200).send(person);
   }
 
   async store({ request, response }) {
-    const { users_id } = request.params;
-    let data = request.only([
-      "name",
-      "sex",
-      "birth",
-      "sex",
-      "cpf",
-      "rg",
-      "address"
-    ]);
+    const { users_id: user } = request.params;
+    const data = request.only(['name', 'sex', 'birth', 'sex', 'cpf', 'rg', 'address']);
 
     let address = await viaCEP.getAddress(data);
     address = await Address.create(address);
@@ -44,7 +33,7 @@ class PersonController {
 
     data.address = address._id;
 
-    let person = new Person({ user: users_id, ...data });
+    const person = new Person({ user, ...data });
     await person.validate();
 
     await address.save();
@@ -58,15 +47,11 @@ class PersonController {
   async update({ request, response }) {
     const options = { new: true, runValidators: true, fields: personF };
 
-    const { users_id, id } = request.params;
+    const { users_id: user, id: _id } = request.params;
 
-    const data = request.only(["name", "sex", "birth"]);
+    const data = request.only(['name', 'sex', 'birth']);
 
-    const person = await Person.findOneAndUpdate(
-      { user: users_id, _id: id },
-      data,
-      options
-    );
+    const person = await Person.findOneAndUpdate({ user, _id }, data, options);
 
     response.status(200).send(person);
   }

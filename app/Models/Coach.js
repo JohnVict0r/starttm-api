@@ -1,10 +1,9 @@
-'use strict'
 
-const BaseModel = use('MongooseModel')
+
+const BaseModel = use('MongooseModel');
 const { Schema } = use('Mongoose');
 
 class Coach extends BaseModel {
-
   static boot({ schema }) {
     this.index({ user: 1 }, { background: true });
   }
@@ -15,16 +14,16 @@ class Coach extends BaseModel {
         type: Schema.Types.ObjectId,
         unique: true,
         required: true,
-        ref: 'User'
+        ref: 'User',
       },
       club: {
         type: Schema.Types.ObjectId,
         unique: true,
         required: true,
-        ref: 'Club'
-      }
-    }
+        ref: 'Club',
+      },
+    };
   }
 }
 
-module.exports = Coach.buildModel('Coach')
+module.exports = Coach.buildModel('Coach');

@@ -1,12 +1,10 @@
-'use strict'
+
 
 const BaseModel = use('MongooseModel');
 const validator = use('App/Validators/Address');
 
 class Address extends BaseModel {
-  static boot({ schema }) {
-
-  }
+  static boot({ schema }) {}
 
   static get schema() {
     return {
@@ -36,10 +34,9 @@ class Address extends BaseModel {
       },
       state: {
         type: String,
-      }
-
-    }
+      },
+    };
   }
 }
 
-module.exports = Address.buildModel('Address')
+module.exports = Address.buildModel('Address');

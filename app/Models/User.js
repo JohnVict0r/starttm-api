@@ -1,5 +1,3 @@
-'use strict'
-
 const BaseModel = use('MongooseModel');
 const { Schema } = use('Mongoose');
 
@@ -9,8 +7,6 @@ class User extends BaseModel {
   static boot({ schema }) {
     this.addHook('preSave', 'UserHook.hashPassword');
   }
-
-
 
   static get schema() {
     return {
@@ -23,7 +19,7 @@ class User extends BaseModel {
           isAsync: true,
           validator: validator.validateEmail,
           message: 'Is not a valid email',
-        }
+        },
       },
       username: {
         type: String,
@@ -33,22 +29,23 @@ class User extends BaseModel {
           isAsync: true,
           validator: validator.validateUsername,
           message: 'Its not a valid username',
-        }
+        },
       },
       password: {
         type: String,
         required: true,
       },
       roles: {
-        type: [{
-          type: Schema.Types.ObjectId,
-          unique: true,
-          ref: 'Role'
-        }],
+        type: [
+          {
+            type: Schema.Types.ObjectId,
+            unique: true,
+            ref: 'Role',
+          },
+        ],
       },
-    }
+    };
   }
-
 }
 
-module.exports = User.buildModel('User')
+module.exports = User.buildModel('User');

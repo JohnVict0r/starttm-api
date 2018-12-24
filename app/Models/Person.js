@@ -1,4 +1,4 @@
-'use strict'
+
 
 const BaseModel = use('MongooseModel');
 const { Schema } = use('mongoose');
@@ -6,9 +6,7 @@ const { Schema } = use('mongoose');
 const validator = use('App/Validators/Person');
 
 class Person extends BaseModel {
-  static boot({ schema }) {
-
-  }
+  static boot({ schema }) {}
 
   static get schema() {
     return {
@@ -16,7 +14,7 @@ class Person extends BaseModel {
         type: Schema.Types.ObjectId,
         required: true,
         unique: true,
-        ref: 'User'
+        ref: 'User',
       },
       name: {
         type: String,
@@ -25,9 +23,9 @@ class Person extends BaseModel {
       sex: {
         type: String,
         required: true,
-        enum: ['MALE', 'FEMALE']
+        enum: ['MALE', 'FEMALE'],
       },
-      birth:{
+      birth: {
         type: Date,
         required: true,
       },
@@ -43,10 +41,10 @@ class Person extends BaseModel {
       address: {
         type: Schema.Types.ObjectId,
         required: true,
-        ref: 'Address'
-      }
-    }
+        ref: 'Address',
+      },
+    };
   }
 }
 
-module.exports = Person.buildModel('Person')
+module.exports = Person.buildModel('Person');

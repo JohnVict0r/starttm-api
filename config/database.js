@@ -1,10 +1,9 @@
-'use strict'
 
-const Env = use('Env')
-const Helpers = use('Helpers')
+
+const Env = use('Env');
+const Helpers = use('Helpers');
 
 module.exports = {
-
   connection: Env.get('DB_CONNECTION', 'mongodb'),
 
   mongodb: {
@@ -19,7 +18,7 @@ module.exports = {
       options: {
         // All options can be found at http://mongoosejs.com/docs/connections.html
       },
-      debug: false
-    }
-  }
-}
+      debug: false,
+    },
+  },
+};

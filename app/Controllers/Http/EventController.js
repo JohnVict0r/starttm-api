@@ -1,10 +1,7 @@
-'use strict'
-
 class EventController {
-
-    index () {
-        return 'Controller for Events'
-      }
+  index() {
+    return 'Controller for Events';
+  }
 }
 
-module.exports = EventController
+module.exports = EventController;

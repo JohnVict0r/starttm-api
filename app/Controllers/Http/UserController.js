@@ -1,30 +1,21 @@
-'use strict'
-
-const User = use('App/Models/User');
-const Role = use('App/Models/Role');
+const { User } = require('../../Models');
 
 const { baseF } = use('App/Utils/ModelFilter');
 
-const Hash = use('Hash');
-
 class UserController {
+  async index({ response }) {
+    const users = await User.find();
 
-    async index({ response }) {
+    response.send(users);
+  }
 
-        let users = await User.find();
+  async show({ request, response }) {
+    const { id: _id } = await request.params;
 
-        response.send(users);
-    }
+    const user = await User.findOne({ _id }, baseF).populate('roles', baseF);
 
-    async show({ request, response }) {
-
-        const { id } = await request.params;
-
-        let user = await User.findOne({ _id: id }, baseF).populate('roles', baseF);
-
-        response.status(200).send(user);
-    }
-
+    response.status(200).send(user);
+  }
 }
 
-module.exports = UserController
+module.exports = UserController;

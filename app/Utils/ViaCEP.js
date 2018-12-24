@@ -1,17 +1,18 @@
 const axios = require('axios');
 
 async function getAddress({ address }) {
+  let newAdress = null;
+  const response = await axios.get(`https://viacep.com.br/ws/${address.cep}/json/`);
+  const { data } = response;
 
-    const response = await axios.get('https://viacep.com.br/ws/' + address.cep + '/json/');
+  newAdress = address;
 
-    let data = response.data;
+  if (data.localidade !== '') newAdress.city = data.localidade;
+  if (data.bairro !== '') newAdress.neighborhood = data.bairro;
+  if (data.uf !== '') newAdress.state = data.uf;
+  if (data.logradouro !== '') newAdress.street = data.logradouro;
 
-    if (data.localidade !== '') address.city = data.localidade;
-    if (data.bairro !== '') address.neighborhood = data.bairro;
-    if (data.uf !== '') address.state = data.uf;
-    if (data.logradouro !== '') address.street = data.logradouro;
-
-    return address;
+  return newAdress;
 }
 
 module.exports = { getAddress };

@@ -1,42 +1,39 @@
-'use strict'
+const { Atlethe } = require('../../Models');
 
-const Atlethe = use('App/Models/Atlethe');
-const { baseF, atletheF, userF, filterDoc } = use('App/Utils/ModelFilter');
+const {
+  baseF, atletheF, userF, filterDoc,
+} = use('App/Utils/ModelFilter');
 
 class AtletheController {
+  async index({ response }) {
+    const atlethe = await Atlethe.find();
 
-    async index({ request, response }) {
+    response.status(200).send(atlethe);
+  }
 
-        const atlethe = await Atlethe.find();
+  async show({ request, response }) {
+    const { users_id: user, id: _id } = request.params;
 
-        response.status(200).send(atlethe);
-    }
+    const atlethe = await Atlethe.findOne({ user, _id }, baseF).populate('user', userF);
 
-    async show({ request, response }) {
+    response.status(200).send(atlethe);
+  }
 
-        const { users_id, id } = request.params;
+  async store({ request, response }) {
+    const { users_id: user } = request.params;
 
-        const atlethe = await Atlethe.findOne({ user: users_id, _id: id }, baseF).populate('user', userF);
+    const data = request.only(['rating', 'rank']);
 
-        response.status(200).send(atlethe);
-    }
+    const atlethe = await Atlethe.create({ user, ...data });
 
-    async store({ request, response }) {
+    atlethe._doc = filterDoc(atlethe._doc, atletheF);
 
-        const { users_id } = request.params;
+    response.status(200).send(atlethe);
+  }
 
-        const data = request.only(['rating', 'rank']);
-
-        const atlethe = await Atlethe.create({ user: users_id, ...data });
-
-        atlethe._doc = filterDoc(atlethe._doc, atletheF);
-
-        response.status(200).send(atlethe);
-    }
-
-    async update({ request, response }) {
-        /* Analisar */
-    }
+  async update({ request, response }) {
+    /* Analisar */
+  }
 }
 
-module.exports = AtletheController
+module.exports = AtletheController;

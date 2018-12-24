@@ -1,16 +1,10 @@
-'use strict'
-
 const BaseModel = use('MongooseModel');
-const { Schema } = use('Mongoose');
-
 const validator = use('App/Validators/User');
 
 class SignupRequest extends BaseModel {
   static boot({ schema }) {
-
-    this.index({ 'created_at': 1 }, { expireAfterSeconds: 30 });
+    this.index({ created_at: 1 }, { expireAfterSeconds: 60 * 5 });
     this.addHook('preSave', 'SignupRequestHook.checkDuplicateUser');
-
   }
 
   static get schema() {
@@ -18,11 +12,11 @@ class SignupRequest extends BaseModel {
       username: {
         type: String,
         required: true,
-        validate:{
+        validate: {
           isAsync: true,
           validator: validator.validateUsername,
-          message: 'Invalid Username'
-        }
+          message: 'Invalid Username',
+        },
       },
       email: {
         type: String,
@@ -32,7 +26,7 @@ class SignupRequest extends BaseModel {
           isAsync: true,
           validator: validator.validateEmail,
           message: 'Invalid Email',
-        }
+        },
       },
       password: {
         type: String,
@@ -42,9 +36,9 @@ class SignupRequest extends BaseModel {
         type: String,
         required: true,
         unique: true,
-      }
-    }
+      },
+    };
   }
 }
 
-module.exports = SignupRequest.buildModel('SignupRequest')
+module.exports = SignupRequest.buildModel('SignupRequest');

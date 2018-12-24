@@ -1,13 +1,9 @@
-'use strict'
-
-const BaseModel = use('MongooseModel')
+const BaseModel = use('MongooseModel');
 const { Schema } = use('Mongoose');
 
 class Arbiter extends BaseModel {
-
   static boot({ schema }) {
     this.index({ user: 1 }, { background: true });
-
   }
 
   static get schema() {
@@ -16,15 +12,15 @@ class Arbiter extends BaseModel {
         type: Schema.Types.ObjectId,
         required: true,
         unique: true,
-        ref: 'User'
+        ref: 'User',
       },
       participations: {
         type: Number,
         default: 0,
-        min: 0
-      }
-    }
+        min: 0,
+      },
+    };
   }
 }
 
-module.exports = Arbiter.buildModel('Arbiter')
+module.exports = Arbiter.buildModel('Arbiter');

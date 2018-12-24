@@ -5,7 +5,7 @@
   "description": "Adonisjs boilerplate for API server with pre-configured JWT",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "nodemon server.js -e js",
     "test": "node ace test",
     "dev": "adonis serve --dev --debug"
   },
@@ -30,7 +30,8 @@
     "adonis-mongoose-model": "^3.0.1",
     "axios": "^0.18.0",
     "md5": "^2.2.1",
-    "random-string": "^0.2.0"
+    "random-string": "^0.2.0",
+    "require-dir": "^1.2.0"
   },
   "devDependencies": {
     "eslint": "^5.10.0",

@@ -1,5 +1,3 @@
-'use strict'
-
 const md5 = require('md5');
 
 const SignupRequest = use('App/Models/Auth/SignupRequest');
@@ -8,41 +6,36 @@ const Mail = use('Mail');
 
 const NotFoundEx = use('App/Exceptions/NotFoundException');
 
-
 class SignupController {
+  async register({ request, response }) {
+    const { username, email, password } = request.all();
+    const token = md5(email + password + username);
 
-    async register({ request, response }) {
+    const signup = await SignupRequest.create({ ...request.all(), token });
 
-        let { username, email, password } = request.all();
-        let token = md5(email + password + username);
+    await Mail.send('emails.signup', signup, (message) => {
+      message
+        .to(email)
+        .from('starttm@account.com')
+        .subject('Confirm Email Address');
+    });
 
-        let signup = await SignupRequest.create({ ...request.all(), token });
+    response.status(202).send('Confirmation email has been sent.');
+  }
 
-        await Mail.send('emails.signup', signup, (message) => {
-            message
-                .to(email)
-                .from('starttm@account.com')
-                .subject('Confirm Email Address')
-        });
+  async confirm({ params, response }) {
+    const signup = await SignupRequest.findOne({ token: params.token });
 
-        response.status(202).send("Confirmation email has been sent.");
-    }
+    if (!signup) throw new NotFoundEx();
 
-    async confirm({ params, response }) {
+    await SignupRequest.deleteOne({ token: params.token });
 
-        let signup = await SignupRequest.findOne({ token: params.token });
+    const { email, username, password } = signup;
 
-        if (!signup)
-            throw new NotFoundEx();
+    await User.create({ email, username, password });
 
-        await SignupRequest.deleteOne({ token: params.token });
-
-        let { email, username, password } = signup;
-
-        await User.create({email, username, password});
-
-        response.status(201).send("User has been registred.")
-    }
+    response.status(201).send('User has been registred.');
+  }
 }
 
-module.exports = SignupController
+module.exports = SignupController;

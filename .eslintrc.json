@@ -1,3 +1,11 @@
 {
-    "extends": "airbnb-base"
+  "extends": "airbnb-base",
+  "rules": {
+    "linebreak-style": "off",
+    "class-methods-use-this": "off",
+    "no-underscore-dangle": "off"
+  },
+  "globals": {
+    "use": true
+  }
 }
