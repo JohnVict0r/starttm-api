@@ -3,6 +3,10 @@ const SignupRequest = require('../../../Models/Auth/SignupRequest');
 
 const Mail = use('Mail');
 
+const Env = use('Env');
+
+const app_url = Env.get('APP_URL') + '/confirmations';
+
 class SubscriptionController {
   async store({ request, response }) {
     const { username, email, password } = request.all();
@@ -10,7 +14,7 @@ class SubscriptionController {
 
     const signup = await SignupRequest.create({ ...request.all(), token });
 
-    await Mail.send('emails.signup', signup, (message) => {
+    await Mail.send('emails.signup', {...signup._doc, app_url}, (message) => {
       message
         .to(email)
         .from('starttm@account.com')
@@ -19,7 +23,7 @@ class SubscriptionController {
 
     response.status(202).send({
       message: 'Confirmation email has been send',
-      link: `http://localhost:3333/confirmations/${token}`,
+      link: `${app_url}/${token}`,
     });
   }
 }
