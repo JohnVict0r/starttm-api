@@ -5,7 +5,7 @@ const Mail = use('Mail');
 
 const Env = use('Env');
 
-const app_url = Env.get('APP_URL') + '/confirmations';
+const appUrl = `${Env.get('APP_URL')}/confirmations`;
 
 class SubscriptionController {
   async store({ request, response }) {
@@ -14,7 +14,7 @@ class SubscriptionController {
 
     const signup = await SignupRequest.create({ ...request.all(), token });
 
-    await Mail.send('emails.signup', {...signup._doc, app_url}, (message) => {
+    await Mail.send('emails.signup', { ...signup._doc, appUrl }, (message) => {
       message
         .to(email)
         .from('starttm@account.com')
@@ -23,7 +23,7 @@ class SubscriptionController {
 
     response.status(202).send({
       message: 'Confirmation email has been send',
-      link: `${app_url}/${token}`,
+      link: `${appUrl}/${token}`,
     });
   }
 }
