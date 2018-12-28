@@ -1,12 +1,11 @@
-'use strict'
 
-const { LogicalException } = require('@adonisjs/generic-exceptions')
+
+const { LogicalException } = require('@adonisjs/generic-exceptions');
 
 class CastException extends LogicalException {
   handle(error, { response }) {
-    response.status(400).send(error.message)
+    response.status(400).send(error);
   }
-
 }
 
-module.exports = CastException
+module.exports = CastException;
