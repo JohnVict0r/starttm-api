@@ -1,9 +1,6 @@
-'use strict'
-
-const Env = use('Env')
+const Env = use('Env');
 
 module.exports = {
-
   authenticator: 'jwt',
 
   jwt: {
@@ -13,8 +10,7 @@ module.exports = {
     uid: 'email',
     password: 'password',
     options: {
-      secret: Env.get('APP_KEY')
-    }
+      secret: Env.get('APP_KEY'),
+    },
   },
-
-}
+};

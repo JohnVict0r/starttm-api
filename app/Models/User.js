@@ -8,6 +8,10 @@ class User extends BaseModel {
     this.addHook('preSave', 'UserHook.hashPassword');
   }
 
+  static get traits() {
+    return ['@provider:Adonis/Acl/HasRole', '@provider:Adonis/Acl/HasPermission'];
+  }
+
   static get schema() {
     return {
       email: {
