@@ -26,6 +26,7 @@
     "@adonisjs/lucid": "^5.0.4",
     "@adonisjs/mail": "^3.0.9",
     "@adonisjs/validator": "^5.0.4",
+    "adonis-acl": "^1.1.1",
     "adonis-mongoose-model": "^3.0.1",
     "axios": "^0.18.0",
     "md5": "^2.2.1",

@@ -1,5 +1,3 @@
-'use strict'
-
 /*
 |--------------------------------------------------------------------------
 | Providers
@@ -19,17 +17,22 @@ const providers = [
   'adonis-mongoose-model/providers/MongooseProvider',
   '@adonisjs/mail/providers/MailProvider',
   '@adonisjs/validator/providers/ValidatorProvider',
-  '@adonisjs/framework/providers/ViewProvider'
-]
+  '@adonisjs/framework/providers/ViewProvider',
+  'adonis-acl/providers/AclProvider',
+];
 
 const aceProviders = [
-  '@adonisjs/lucid/providers/MigrationsProvider'
-]
+  '@adonisjs/lucid/providers/MigrationsProvider',
+  'adonis-acl/providers/CommandsProvider',
+];
 
+const aliases = { Role: 'Adonis/Acl/Role', Permission: 'Adonis/Acl/Permission' };
 
-const aliases = {}
+const commands = [];
 
-
-const commands = []
-
-module.exports = { providers, aceProviders, aliases, commands }
+module.exports = {
+  providers,
+  aceProviders,
+  aliases,
+  commands,
+};

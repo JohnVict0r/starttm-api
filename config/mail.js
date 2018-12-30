@@ -1,9 +1,6 @@
-'use strict'
-
-const Env = use('Env')
+const Env = use('Env');
 
 module.exports = {
-
   connection: Env.get('MAIL_CONNECTION', 'smtp'),
 
   smtp: {
@@ -14,11 +11,11 @@ module.exports = {
     secure: false,
     auth: {
       user: Env.get('MAIL_USERNAME'),
-      pass: Env.get('MAIL_PASSWORD')
+      pass: Env.get('MAIL_PASSWORD'),
     },
     maxConnections: 5,
     maxMessages: 100,
-    rateLimit: 10
+    rateLimit: 10,
   },
 
   /*
@@ -40,7 +37,7 @@ module.exports = {
   sparkpost: {
     driver: 'sparkpost',
     apiKey: Env.get('SPARKPOST_API_KEY'),
-    extras: {}
+    extras: {},
   },
 
   /*
@@ -64,7 +61,7 @@ module.exports = {
     driver: 'mailgun',
     domain: Env.get('MAILGUN_DOMAIN'),
     apiKey: Env.get('MAILGUN_API_KEY'),
-    extras: {}
+    extras: {},
   },
 
   /*
@@ -79,6 +76,6 @@ module.exports = {
   |
   */
   ethereal: {
-    driver: 'ethereal'
-  }
-}
+    driver: 'ethereal',
+  },
+};
