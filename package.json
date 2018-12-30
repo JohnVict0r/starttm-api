@@ -5,7 +5,6 @@
   "description": "Adonisjs boilerplate for API server with pre-configured JWT",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js -e js",
     "test": "node ace test",
     "dev": "adonis serve --dev --debug"
   },
@@ -36,8 +35,7 @@
   "devDependencies": {
     "eslint": "^5.10.0",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0",
-    "nodemon": "^1.18.4"
+    "eslint-plugin-import": "^2.14.0"
   },
   "autoload": {
     "App": "./app"
