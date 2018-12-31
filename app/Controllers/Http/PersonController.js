@@ -7,23 +7,23 @@ const {
 } = use('App/Utils/ModelFilter');
 
 class PersonController {
-  async index({ response }) {
-    const persons = await Person.find();
+  async index() {
+    const people = await Person.find();
 
-    response.status(200).send(persons);
+    return people;
   }
 
-  async show({ request, response }) {
+  async show({ request }) {
     const { users_id: user, id: _id } = request.params;
 
     const person = await Person.findOne({ user, _id }, baseF)
       .populate('address', addressF)
       .populate('user', userF);
 
-    response.status(200).send(person);
+    return person;
   }
 
-  async store({ request, response }) {
+  async store({ request }) {
     const { users_id: user } = request.params;
     const data = request.only(['name', 'sex', 'birth', 'sex', 'cpf', 'rg', 'address']);
 
@@ -41,10 +41,10 @@ class PersonController {
 
     person._doc = filterDoc(person._doc, personF);
 
-    response.status(201).send();
+    return person;
   }
 
-  async update({ request, response }) {
+  async update({ request }) {
     const options = { new: true, runValidators: true, fields: personF };
 
     const { users_id: user, id: _id } = request.params;
@@ -53,7 +53,7 @@ class PersonController {
 
     const person = await Person.findOneAndUpdate({ user, _id }, data, options);
 
-    response.status(200).send(person);
+    return person;
   }
 }
 

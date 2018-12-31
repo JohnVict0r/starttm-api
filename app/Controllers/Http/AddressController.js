@@ -7,7 +7,7 @@ const { addressF } = use('App/Utils/ModelsFilter');
 const viaCEP = require('../../Utils/ViaCEP');
 
 class AddressController {
-  async update({ request, response }) {
+  async update({ request }) {
     const options = { new: true, runValidators: true, fields: addressF };
 
     const { people_id: _id, id: address } = request.params;
@@ -20,7 +20,7 @@ class AddressController {
 
     const add = await Address.findOneAndUpdate({ address }, data, options);
 
-    response.status(200).send(add);
+    return add;
   }
 }
 

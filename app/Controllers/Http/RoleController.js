@@ -1,9 +1,9 @@
 const { Role } = use('Role');
 
 class RoleController {
-  async index({ response }) {
+  async index() {
     const roles = await Role.find();
-    response.status(200).send(roles);
+    return roles;
   }
 }
 

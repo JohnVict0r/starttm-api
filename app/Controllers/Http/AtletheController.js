@@ -5,21 +5,21 @@ const {
 } = use('App/Utils/ModelFilter');
 
 class AtletheController {
-  async index({ response }) {
+  async index() {
     const atlethe = await Atlethe.find();
 
-    response.status(200).send(atlethe);
+    return atlethe;
   }
 
-  async show({ request, response }) {
+  async show({ request }) {
     const { users_id: user, id: _id } = request.params;
 
     const atlethe = await Atlethe.findOne({ user, _id }, baseF).populate('user', userF);
 
-    response.status(200).send(atlethe);
+    return atlethe;
   }
 
-  async store({ request, response }) {
+  async store({ request }) {
     const { users_id: user } = request.params;
 
     const data = request.only(['rating', 'rank']);
@@ -28,7 +28,7 @@ class AtletheController {
 
     atlethe._doc = filterDoc(atlethe._doc, atletheF);
 
-    response.status(200).send(atlethe);
+    return atlethe;
   }
 
   async update({ request, response }) {

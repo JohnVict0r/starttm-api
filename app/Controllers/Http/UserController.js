@@ -3,18 +3,18 @@ const { User } = require('../../Models');
 const { baseF } = use('App/Utils/ModelFilter');
 
 class UserController {
-  async index({ response }) {
+  async index() {
     const users = await User.find();
 
-    response.send(users);
+    return users;
   }
 
-  async show({ request, response }) {
+  async show({ request }) {
     const { id: _id } = await request.params;
 
     const user = await User.findOne({ _id }, baseF).populate('roles', baseF);
 
-    response.status(200).send(user);
+    return user;
   }
 }
 

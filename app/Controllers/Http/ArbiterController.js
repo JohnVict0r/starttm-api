@@ -5,27 +5,27 @@ const {
 } = use('App/Utils/ModelFilter');
 
 class ArbiterController {
-  async index({ response }) {
+  async index() {
     const arbiters = await Arbiter.find();
-    response.status(200).send(arbiters);
+    return arbiters;
   }
 
-  async show({ request, response }) {
+  async show({ request }) {
     const { users_id: user, id: _id } = request.params;
 
     const arbiter = await Arbiter.findOne({ user, _id }, baseF).populate('user', userF);
 
-    response.status(200).send(arbiter);
+    return arbiter;
   }
 
-  async store({ request, response }) {
+  async store({ request }) {
     const { users_id: user } = request.params;
 
     const arbiter = await Arbiter.create({ user });
 
     arbiter._doc = filterDoc(arbiter._doc, arbiterF);
 
-    response.status(200).send(arbiter);
+    return arbiter;
   }
 }
 
