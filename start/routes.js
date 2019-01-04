@@ -1,6 +1,6 @@
 const Route = use('Route');
 
-Route.get('/', () => { return 'Hello World';});
+Route.get('/', () => 'Hello World');
 
 // Subscription
 Route.post('/subscriptions', 'Auth/SubscriptionController.store');

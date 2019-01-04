@@ -1,6 +1,7 @@
 const md5 = require('md5');
 
-const SignupRequest = use('App/Models/Auth/SignupRequest');
+const { User } = use('App/Models');
+const SubscriptionRequest = use('App/Models/Auth/SubscriptionRequest');
 const Mail = use('Mail');
 const Env = use('Env');
 
@@ -11,7 +12,7 @@ class SubscriptionController {
     const { username, email, password } = request.all();
     const token = md5(email + password + username);
 
-    const signup = await SignupRequest.create({ ...request.all(), token });
+    const signup = await SubscriptionRequest.create({ ...request.all(), token });
 
     await Mail.send('emails.signup', { ...signup._doc, appUrl }, (message) => {
       message

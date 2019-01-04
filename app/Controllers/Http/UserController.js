@@ -11,9 +11,7 @@ class UserController {
   async show({ params }) {
     const user = await User.findById(params.id, baseF).populate('roles', baseF);
 
-    if (!user) {
-      throw new ResourceNotFoundException('Cannot did find a User by given data', 400);
-    }
+    if (!user) throw new ResourceNotFoundException('Cannot did find a User by given data', 400);
 
     return user;
   }
