@@ -1,10 +1,6 @@
-const Person = use('App/Models/Person');
-const Address = use('App/Models/Address');
+const { Person, Address } = use('App/Models');
 
-const { NotFoundEx } = use('App/Exceptions');
 const { addressF } = use('App/Utils/ModelsFilter');
-
-const viaCEP = require('../../Utils/ViaCEP');
 
 class AddressController {
   async update({ request }) {
@@ -12,7 +8,7 @@ class AddressController {
 
     const { people_id: _id, id: address } = request.params;
 
-    const data = await viaCEP.getAddress({ address: request.all() });
+    const data = request.except(['_id']);
 
     const person = await Person.findOne({ _id, address });
 

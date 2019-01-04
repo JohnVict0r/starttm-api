@@ -1,8 +1,7 @@
 const md5 = require('md5');
-const SignupRequest = require('../../../Models/Auth/SignupRequest');
 
+const SignupRequest = use('App/Models/Auth/SignupRequest');
 const Mail = use('Mail');
-
 const Env = use('Env');
 
 const appUrl = `${Env.get('APP_URL')}/confirmations`;

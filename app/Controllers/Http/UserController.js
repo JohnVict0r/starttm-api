@@ -1,5 +1,4 @@
-const { User } = require('../../Models');
-
+const { User } = use('App/Models');
 const { baseF } = use('App/Utils/ModelFilter');
 
 class UserController {

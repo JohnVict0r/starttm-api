@@ -1,6 +1,4 @@
-const { Person, Address } = use('App/Models/User');
-
-const viaCEP = require('../../Utils/ViaCEP');
+const { Person, Address } = use('App/Models');
 
 const {
   baseF, personF, userF, addressF, filterDoc,
@@ -27,11 +25,10 @@ class PersonController {
     const { users_id: user } = request.params;
     const data = request.only(['name', 'sex', 'birth', 'sex', 'cpf', 'rg', 'address']);
 
-    let address = await viaCEP.getAddress(data);
-    address = await Address.create(address);
+    const address = new Address(data.address);
     await address.validate();
 
-    data.address = address._id;
+    data.address = address;
 
     const person = new Person({ user, ...data });
     await person.validate();

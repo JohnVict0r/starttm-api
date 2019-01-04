@@ -1,4 +1,4 @@
-const { Atlethe } = require('../../Models');
+const { Atlethe } = use('App/Models');
 
 const {
   baseF, atletheF, userF, filterDoc,

@@ -1,4 +1,4 @@
-const { Role } = use('Role');
+const { Role } = use('App/Models');
 
 class RoleController {
   async index() {

@@ -1,4 +1,4 @@
-const { Arbiter } = require('../../Models');
+const { Arbiter } = use('App/Models');
 
 const {
   baseF, arbiterF, userF, filterDoc,

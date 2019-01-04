@@ -1,6 +1,6 @@
 const NotFoundEx = use('App/Exceptions/NotFoundException');
-const { User } = require('../../../Models');
-const SignupRequest = require('../../../Models/Auth/SignupRequest');
+const SignupRequest = use('App/Models/Auth/SignupRequest');
+const { User } = use('App/Models');
 
 class ConfirmationController {
   async show({ response, params }) {
