@@ -1,4 +1,5 @@
 const { Atlethe } = use('App/Models');
+const { ResourceNotFoundException } = use('App/Exceptions');
 
 const {
   baseF, atletheF, userF, filterDoc,
@@ -15,6 +16,8 @@ class AtletheController {
     const { users_id: user, id: _id } = request.params;
 
     const atlethe = await Atlethe.findOne({ user, _id }, baseF).populate('user', userF);
+
+    if (!atlethe) throw new ResourceNotFoundException('Cannot did find a atlethe by given data', 400);
 
     return atlethe;
   }

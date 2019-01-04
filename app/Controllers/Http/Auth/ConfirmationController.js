@@ -1,16 +1,17 @@
-const NotFoundEx = use('App/Exceptions/NotFoundException');
 const SignupRequest = use('App/Models/Auth/SignupRequest');
+const { ResourceNotFoundException } = use('App/Exceptions');
+
 const { User } = use('App/Models');
 
 class ConfirmationController {
   async show({ response, params }) {
-    const signup = await SignupRequest.findOne({ token: params.token });
+    const subscription = await SignupRequest.findOne({ token: params.token });
 
-    if (!signup) throw new NotFoundEx();
+    if (!subscription) throw new ResourceNotFoundException('Cannot did find a subscription by given data', 400);
 
     await SignupRequest.deleteOne({ token: params.token });
 
-    const { email, username, password } = signup;
+    const { email, username, password } = subscription;
 
     await User.create({ email, username, password });
 

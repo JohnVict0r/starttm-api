@@ -1,6 +1,6 @@
 const { User } = use('App/Models');
 const { baseF } = use('App/Utils/ModelFilter');
-
+const { ResourceNotFoundException } = use('App/Exceptions');
 class UserController {
   async index() {
     const users = await User.find();
@@ -8,10 +8,12 @@ class UserController {
     return users;
   }
 
-  async show({ request }) {
-    const { id: _id } = await request.params;
+  async show({ params }) {
+    const user = await User.findById(params.id, baseF).populate('roles', baseF);
 
-    const user = await User.findOne({ _id }, baseF).populate('roles', baseF);
+    if (!user) {
+      throw new ResourceNotFoundException('Cannot did find a User by given data', 400);
+    }
 
     return user;
   }

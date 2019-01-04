@@ -1,4 +1,5 @@
 const { Person, Address } = use('App/Models');
+const { ResourceNotFoundException } = use('App/Exceptions');
 
 const { addressF } = use('App/Utils/ModelsFilter');
 
@@ -12,7 +13,7 @@ class AddressController {
 
     const person = await Person.findOne({ _id, address });
 
-    if (!person) throw new NotFoundEx();
+    if (!person) throw new ResourceNotFoundException('Cannot did find a person by given data', 400);
 
     const add = await Address.findOneAndUpdate({ address }, data, options);
 

@@ -1,4 +1,5 @@
 const { Arbiter } = use('App/Models');
+const { ResourceNotFoundException } = use('App/Exceptions');
 
 const {
   baseF, arbiterF, userF, filterDoc,
@@ -14,6 +15,8 @@ class ArbiterController {
     const { users_id: user, id: _id } = request.params;
 
     const arbiter = await Arbiter.findOne({ user, _id }, baseF).populate('user', userF);
+
+    if (!arbiter) throw new ResourceNotFoundException('Cannot did find a arbiter by given data', 400);
 
     return arbiter;
   }

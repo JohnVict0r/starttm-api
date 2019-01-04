@@ -1,14 +1,17 @@
 const BaseExceptionHandler = use('BaseExceptionHandler');
 
-const { ValidationEx, CastEx } = use('App/Exceptions');
+const Env = use('Env');
+const Youch = use('Youch');
 
 class ExceptionHandler extends BaseExceptionHandler {
   async handle(error, { request, response }) {
-    if (['E_INVALID_JWT_TOKEN', 'E_ROUTE_NOT_FOUND'].includes(error.code)) return response.status(error.status).send(error);
-    if (error.name == 'ValidationError') return new ValidationEx().handle(error, { request, response });
-    if (error.name == 'CastError') return new CastEx().handle(error, { request, response });
+    if (Env.get('NODE_ENV') === 'development') {
+      const youch = new Youch(error, request);
+      const errorJSON = await youch.toJSON();
 
-    return response.send({ stack: error.stack });
+      return response.status(error.status).send(errorJSON);
+    }
+    return response.status(error.status).send(error.message);
   }
 
   async report(error, { request }) {}

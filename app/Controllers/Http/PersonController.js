@@ -1,5 +1,5 @@
 const { Person, Address } = use('App/Models');
-
+const { ResourceNotFoundException } = use('App/Exceptions');
 const {
   baseF, personF, userF, addressF, filterDoc,
 } = use('App/Utils/ModelFilter');
@@ -17,6 +17,8 @@ class PersonController {
     const person = await Person.findOne({ user, _id }, baseF)
       .populate('address', addressF)
       .populate('user', userF);
+
+    if (!person) throw new ResourceNotFoundException('Cannot did find a person by given data', 400);
 
     return person;
   }
