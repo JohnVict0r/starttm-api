@@ -1,17 +1,12 @@
 const BaseModel = use('MongooseModel');
-const { Schema } = use('Mongoose');
 
 class Role extends BaseModel {
-  static boot({ schema }) {
-    this.index({ user: 1, type: 1, active: 1 }, { background: true, unique: true });
+  static boot() {
+    this.index({ type: 1, active: 1 }, { background: true, unique: true });
   }
 
   static get schema() {
     return {
-      user: {
-        type: Schema.Types.ObjectId,
-        required: true,
-      },
       startDate: {
         type: Date,
         required: true,

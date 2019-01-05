@@ -22,6 +22,10 @@ class Athlete extends BaseModel {
         min: 0,
         max: 9,
       },
+      federation: {
+        type: Schema.Types.ObjectId,
+        refs: 'Federation',
+      },
     };
   }
 }

@@ -1,4 +1,5 @@
 const BaseModel = use('MongooseModel');
+const { Schema } = use('Mongoose');
 
 const { ufs } = use('App/Models/Address');
 

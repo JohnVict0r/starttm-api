@@ -1,5 +1,3 @@
-
-
 const BaseModel = use('MongooseModel');
 const { Schema } = use('Mongoose');
 
@@ -14,7 +12,7 @@ class Club extends BaseModel {
         type: String,
         required: true,
       },
-      clubManager: {
+      manager: {
         type: Schema.Types.ObjectId,
         required: true,
         unique: true,
@@ -25,6 +23,10 @@ class Club extends BaseModel {
         required: true,
         unique: true,
         ref: 'User',
+      },
+      federation: {
+        type: Schema.Types.ObjectId,
+        refs: 'Federation',
       },
     };
   }
