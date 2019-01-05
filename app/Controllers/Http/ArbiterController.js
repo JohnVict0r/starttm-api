@@ -22,14 +22,12 @@ class ArbiterController {
     return arbiter;
   }
 
-  async store({ request }) {
+  async store({ request, response }) {
     const { users_id: user } = request.params;
 
-    const arbiter = await Arbiter.create({ user });
+    await Arbiter.create({ user });
 
-    arbiter._doc = filterDoc(arbiter._doc, arbiterF);
-
-    return arbiter;
+    response.send({ message: 'The resource has been created' }, 201);
   }
 }
 

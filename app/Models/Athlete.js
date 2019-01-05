@@ -16,7 +16,7 @@ class Athlete extends BaseModel {
         type: Number,
         required: true,
       },
-      rank: {
+      ranking: {
         type: Number,
         required: true,
         min: 0,

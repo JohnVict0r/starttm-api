@@ -27,7 +27,7 @@ const DateSchema = new Schema({
 });
 
 class Tournament extends BaseModel {
-  static boot({ schema }) {}
+  static boot() {}
 
   static get schema() {
     return {
@@ -48,18 +48,6 @@ class Tournament extends BaseModel {
         type: DateSchema,
         required: true,
       },
-      athletes: {
-        type: Schema.Types.ObjectId,
-        refs: 'Athlete',
-      },
-      coaches: {
-        type: Schema.Types.ObjectId,
-        refs: 'Coach',
-      },
-      arbiters: {
-        type: Schema.Types.ObjectId,
-        refs: 'Arbiter',
-      },
       address: {
         type: Schema.Types.ObjectId,
         refs: 'Address',
@@ -68,6 +56,27 @@ class Tournament extends BaseModel {
         type: Schema.Types.ObjectId,
         refs: 'Federation',
       },
+      athletes: [
+        {
+          type: Schema.Types.ObjectId,
+          refs: 'Athlete',
+          unique: true,
+        },
+      ],
+      coaches: [
+        {
+          type: Schema.Types.ObjectId,
+          refs: 'Coach',
+          unique: true,
+        },
+      ],
+      arbiters: [
+        {
+          type: Schema.Types.ObjectId,
+          refs: 'Arbiter',
+          unique: true,
+        },
+      ],
     };
   }
 }

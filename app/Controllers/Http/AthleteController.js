@@ -1,9 +1,6 @@
 const { Athlete } = use('App/Models');
 const { ResourceNotFoundException } = use('App/Exceptions');
-
-const {
-  baseF, athleteF, userF, filterDoc,
-} = use('App/Utils/ModelFilter');
+const { baseF, userF } = use('App/Utils/ModelFilter');
 
 class AthleteController {
   async index() {
@@ -22,16 +19,14 @@ class AthleteController {
     return athlete;
   }
 
-  async store({ request }) {
+  async store({ request, response }) {
     const { users_id: user } = request.params;
 
-    const data = request.only(['rating', 'rank']);
+    const data = request.only(['rating', 'ranking']);
 
-    const athlete = await Athlete.create({ user, ...data });
+    await Athlete.create({ user, ...data });
 
-    athlete._doc = filterDoc(athlete._doc, athleteF);
-
-    return athlete;
+    response.send({ message: 'The resource has been created' }, 201);
   }
 }
 

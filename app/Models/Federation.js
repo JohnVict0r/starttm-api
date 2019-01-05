@@ -1,10 +1,9 @@
 const BaseModel = use('MongooseModel');
-const { Schema } = use('Mongoose');
 
 const { ufs } = use('App/Models/Address');
 
 class Federation extends BaseModel {
-  static boot({ schema }) {
+  static boot() {
     this.index({ name: 1 }, { background: true });
   }
 

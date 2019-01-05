@@ -19,7 +19,7 @@ class RoleController {
     return role;
   }
 
-  async store({ request, params }) {
+  async store({ request, response, params }) {
     const data = request.only(['type']);
     const startDate = Date.now();
 
@@ -31,7 +31,7 @@ class RoleController {
     await role.save();
     await user.save();
 
-    return role;
+    response.send({ message: 'The resource has been created' }, 201);
   }
 }
 

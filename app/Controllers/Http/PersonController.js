@@ -23,24 +23,18 @@ class PersonController {
     return person;
   }
 
-  async store({ request }) {
+  async store({ request, response }) {
     const { users_id: user } = request.params;
     const data = request.only(['name', 'sex', 'birth', 'sex', 'cpf', 'rg', 'address']);
 
     const address = new Address(data.address);
-    await address.validate();
-
     data.address = address;
-
     const person = new Person({ user, ...data });
-    await person.validate();
 
     await address.save();
     await person.save();
 
-    person._doc = filterDoc(person._doc, personF);
-
-    return person;
+    response.send({ message: 'The resource has been created' }, 201);
   }
 
   async update({ request }) {
