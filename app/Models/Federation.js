@@ -1,6 +1,6 @@
-
-
 const BaseModel = use('MongooseModel');
+
+const { ufs } = use('App/Models/Address');
 
 class Federation extends BaseModel {
   static boot({ schema }) {
@@ -12,7 +12,7 @@ class Federation extends BaseModel {
       uf: {
         type: String,
         required: true,
-        enum: ['RN', 'SP', 'AC'], // Tem outros
+        enum: ufs,
       },
       name: {
         type: String,
