@@ -1,9 +1,7 @@
-
-
 const BaseModel = use('MongooseModel');
 const { Schema } = use('mongoose');
 
-class Atlethe extends BaseModel {
+class Athlete extends BaseModel {
   static boot({ schema }) {}
 
   static get schema() {
@@ -28,4 +26,4 @@ class Atlethe extends BaseModel {
   }
 }
 
-module.exports = Atlethe.buildModel('Atlethe');
+module.exports = Athlete.buildModel('Athlete');

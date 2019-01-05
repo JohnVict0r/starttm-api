@@ -8,6 +8,7 @@ const {
 class ArbiterController {
   async index() {
     const arbiters = await Arbiter.find();
+
     return arbiters;
   }
 

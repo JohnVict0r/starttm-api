@@ -43,6 +43,7 @@ class User extends BaseModel {
         {
           type: Schema.Types.ObjectId,
           ref: 'Role',
+          unique: true,
         },
       ],
     };

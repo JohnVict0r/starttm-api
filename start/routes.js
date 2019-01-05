@@ -21,5 +21,13 @@ Route.resource('users.arbiters', 'ArbiterController')
   .apiOnly()
   .except(['destroy', 'update']);
 
+// Athlete
+Route.resource('users.athletes');
+
 // Address
-Route.resource('people.address', 'AddressController').only(['update']);
+Route.resource('people.addresses', 'AddressController').only(['update']);
+
+// Roles
+Route.resource('users.roles', 'RoleController')
+  .apiOnly()
+  .except(['update']);
