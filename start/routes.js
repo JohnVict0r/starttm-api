@@ -22,14 +22,17 @@ Route.resource('users.arbiters', 'ArbiterController')
   .except(['destroy', 'update']);
 
 // Athlete
-Route.resource('users.athletes')
+Route.resource('users.athletes', 'AtheteController')
   .apiOnly()
   .except(['update', 'destroy']);
 
 // Address
 Route.resource('people.addresses', 'AddressController').only(['update']);
 
+// Federations
+Route.resource('federations', 'FederationController').apiOnly();
+
 // Roles
 Route.resource('users.roles', 'RoleController')
   .apiOnly()
-  .except(['update']);
+  .except(['update', 'destroy']);

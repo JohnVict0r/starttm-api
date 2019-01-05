@@ -23,7 +23,7 @@ class Role extends BaseModel {
         type: String,
         required: true,
         enum: [
-          'ATLETHE',
+          'ATHLETE',
           'COACH',
           'ARBITER',
           'FEDERATION_PRESIDENT',
