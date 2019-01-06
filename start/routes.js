@@ -26,13 +26,16 @@ Route.resource('users.athletes', 'AtheteController')
   .apiOnly()
   .except(['update', 'destroy']);
 
-// Federations
+// Federation
 Route.resource('federations', 'FederationController').apiOnly();
 
-// Roles
+// Role
 Route.resource('users.roles', 'RoleController')
   .apiOnly()
   .except(['update', 'destroy']);
 
 // Tournament
 Route.resource('tournaments', 'TournamentController').apiOnly();
+
+// Club
+Route.resource('clubs', 'ClubController').apiOnly();

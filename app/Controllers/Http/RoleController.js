@@ -26,6 +26,8 @@ class RoleController {
     const role = new Role({ ...data, startDate });
     const user = await User.findById(params.users_id);
 
+    if (!user.roles) user.roles = [];
+
     user.roles.push(role);
 
     await role.save();

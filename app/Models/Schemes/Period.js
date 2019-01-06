@@ -12,7 +12,7 @@ const Period = new Schema(
     },
   },
   {
-    autoIndex: false,
+    _id: false,
   },
 );
 

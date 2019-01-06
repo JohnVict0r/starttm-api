@@ -11,6 +11,7 @@ class Club extends BaseModel {
       name: {
         type: String,
         required: true,
+        unique: true,
       },
       manager: {
         type: Schema.Types.ObjectId,
@@ -26,7 +27,7 @@ class Club extends BaseModel {
       },
       federation: {
         type: Schema.Types.ObjectId,
-        refs: 'Federation',
+        ref: 'Federation',
       },
     };
   }

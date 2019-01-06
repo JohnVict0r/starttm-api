@@ -15,7 +15,7 @@ const Price = new Schema(
     },
   },
   {
-    autoIndex: false,
+    _id: false,
   },
 );
 

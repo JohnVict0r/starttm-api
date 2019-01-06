@@ -28,7 +28,7 @@ class TournamentController {
   }
 
   async update({ request, params }) {
-    const data = request.except(['_id', 'athletes', 'coaches', 'arbiters']);
+    const data = request.except(['athletes', 'coaches', 'arbiters']);
     const options = { new: true, runValidators: true, fields: tournamentF };
 
     const tournament = await Tournament.findByIdAndUpdate(params.id, data, options);
