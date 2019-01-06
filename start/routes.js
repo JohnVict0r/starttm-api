@@ -26,9 +26,6 @@ Route.resource('users.athletes', 'AtheteController')
   .apiOnly()
   .except(['update', 'destroy']);
 
-// Address
-Route.resource('people.addresses', 'AddressController').only(['update']);
-
 // Federations
 Route.resource('federations', 'FederationController').apiOnly();
 
@@ -36,3 +33,6 @@ Route.resource('federations', 'FederationController').apiOnly();
 Route.resource('users.roles', 'RoleController')
   .apiOnly()
   .except(['update', 'destroy']);
+
+// Tournament
+Route.resource('tournaments', 'TournamentController').apiOnly();

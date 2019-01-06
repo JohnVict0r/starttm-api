@@ -2,7 +2,7 @@ const { Arbiter } = use('App/Models');
 const { ResourceNotFoundException } = use('App/Exceptions');
 
 const {
-  baseF, arbiterF, userF, filterDoc,
+  baseF, userF,
 } = use('App/Utils/ModelFilter');
 
 class ArbiterController {

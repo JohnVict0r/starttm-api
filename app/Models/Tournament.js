@@ -1,30 +1,6 @@
 const BaseModel = use('MongooseModel');
 const { Schema } = use('Mongoose');
-
-const PriceSchema = new Schema({
-  rating: {
-    type: Number,
-    required: true,
-  },
-  ranking: {
-    type: Number,
-    required: true,
-  },
-  all: {
-    type: Number,
-  },
-});
-
-const DateSchema = new Schema({
-  start: {
-    type: Date,
-    required: true,
-  },
-  end: {
-    type: Date,
-    required: true,
-  },
-});
+const { Period, Address, Price } = use('App/Models/Schemes');
 
 class Tournament extends BaseModel {
   static boot() {}
@@ -37,44 +13,41 @@ class Tournament extends BaseModel {
       },
       type: {
         type: String,
-        enum: [],
         required: true,
       },
       price: {
-        type: PriceSchema,
+        type: Price,
         required: true,
       },
       date: {
-        type: DateSchema,
+        type: Period,
         required: true,
       },
       address: {
-        type: Schema.Types.ObjectId,
-        refs: 'Address',
+        type: Address,
+        required: true,
       },
       federation: {
         type: Schema.Types.ObjectId,
-        refs: 'Federation',
+        ref: 'Federation',
+        required: true,
       },
       athletes: [
         {
           type: Schema.Types.ObjectId,
-          refs: 'Athlete',
-          unique: true,
+          ref: 'Athlete',
         },
       ],
       coaches: [
         {
           type: Schema.Types.ObjectId,
-          refs: 'Coach',
-          unique: true,
+          ref: 'Coach',
         },
       ],
       arbiters: [
         {
           type: Schema.Types.ObjectId,
-          refs: 'Arbiter',
-          unique: true,
+          ref: 'Arbiter',
         },
       ],
     };

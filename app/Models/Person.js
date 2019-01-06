@@ -1,9 +1,6 @@
-
-
 const BaseModel = use('MongooseModel');
 const { Schema } = use('mongoose');
-
-const validator = use('App/Validators/Person');
+const { Address } = use('App/Models/Schemes');
 
 class Person extends BaseModel {
   static boot({ schema }) {}
@@ -39,9 +36,8 @@ class Person extends BaseModel {
         unique: true,
       },
       address: {
-        type: Schema.Types.ObjectId,
+        type: Address,
         required: true,
-        ref: 'Address',
       },
     };
   }
