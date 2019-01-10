@@ -1,6 +1,6 @@
 const BaseModel = use('MongooseModel');
 
-const { ufs } = use('App/Utils/Address');
+const { ufs } = use('App/Utils/Data/Address');
 
 class Federation extends BaseModel {
   static boot() {

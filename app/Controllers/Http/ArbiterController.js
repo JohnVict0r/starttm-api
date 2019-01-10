@@ -1,21 +1,17 @@
 const { Arbiter } = use('App/Models');
 const { ResourceNotFoundException } = use('App/Exceptions');
 
-const {
-  baseF, userF,
-} = use('App/Utils/ModelFilter');
+const { baseF, arbiterF, userF } = use('App/Utils/ModelFilter');
 
 class ArbiterController {
   async index() {
-    const arbiters = await Arbiter.find();
+    const arbiters = await Arbiter.find({}, arbiterF);
 
     return arbiters;
   }
 
-  async show({ request }) {
-    const { users_id: user, id: _id } = request.params;
-
-    const arbiter = await Arbiter.findOne({ user, _id }, baseF).populate('user', userF);
+  async show({ params }) {
+    const arbiter = await Arbiter.findById(params.id, baseF).populate('user', userF);
 
     if (!arbiter) throw new ResourceNotFoundException('Cannot did find a arbiter by given data', 400);
 
@@ -23,9 +19,9 @@ class ArbiterController {
   }
 
   async store({ request, response }) {
-    const { users_id: user } = request.params;
+    const data = request.all();
 
-    await Arbiter.create({ user });
+    await Arbiter.create(data);
 
     response.send({ message: 'The resource has been created' }, 201);
   }

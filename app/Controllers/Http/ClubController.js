@@ -1,8 +1,9 @@
 const { Club } = use('App/Models');
+const { ResourceNotFoundException } = use('App/Exceptions');
+
 const {
   clubF, baseF, userF, federationF,
 } = use('App/Utils/ModelFilter');
-const { ResourceNotFoundException } = use('App/Exceptions');
 
 class ClubController {
   async index() {

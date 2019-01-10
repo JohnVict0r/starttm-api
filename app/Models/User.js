@@ -23,12 +23,6 @@ class User extends BaseModel {
         type: String,
         required: true,
       },
-      role: {
-        type: [{ type: Schema.Types.ObjectId, ref: 'Role' }],
-        unique: true,
-        sparse: true,
-        default: undefined,
-      },
     };
   }
 }

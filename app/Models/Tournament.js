@@ -1,6 +1,8 @@
 const BaseModel = use('MongooseModel');
 const { Schema } = use('Mongoose');
-const { Period, Address, Price } = use('App/Models/Schemes');
+const {
+  Period, Address, Price, Category,
+} = use('App/Models/Schemes');
 
 class Tournament extends BaseModel {
   static boot() {}
@@ -26,6 +28,9 @@ class Tournament extends BaseModel {
       address: {
         type: Address,
         required: true,
+      },
+      categories: {
+        type: [Category],
       },
       federation: {
         type: Schema.Types.ObjectId,

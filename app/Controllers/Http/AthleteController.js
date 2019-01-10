@@ -1,18 +1,20 @@
 const { Athlete } = use('App/Models');
 const { ResourceNotFoundException } = use('App/Exceptions');
-const { baseF, userF } = use('App/Utils/ModelFilter');
+const {
+  baseF, userF, federationF, athleteF,
+} = use('App/Utils/ModelFilter');
 
 class AthleteController {
   async index() {
-    const athletes = await Athlete.find();
+    const athletes = await Athlete.find({}, athleteF);
 
     return athletes;
   }
 
-  async show({ request }) {
-    const { users_id: user, id: _id } = request.params;
-
-    const athlete = await Athlete.findOne({ user, _id }, baseF).populate('user', userF);
+  async show({ params }) {
+    const athlete = await Athlete.findById(params.id, baseF)
+      .populate('user', userF)
+      .populate('federation', federationF);
 
     if (!athlete) throw new ResourceNotFoundException('Cannot did find a athlete by given data', 400);
 
@@ -20,11 +22,9 @@ class AthleteController {
   }
 
   async store({ request, response }) {
-    const { users_id: user } = request.params;
+    const data = request.all();
 
-    const data = request.only(['rating', 'ranking']);
-
-    await Athlete.create({ user, ...data });
+    await Athlete.create(data);
 
     response.send({ message: 'The resource has been created' }, 201);
   }

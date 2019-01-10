@@ -1,36 +1,29 @@
-'use strict'
-
 const { validate } = use('Validator');
 
 class User {
+  async validateEmail(email) {
+    const rules = {
+      email: 'email|required',
+    };
 
-    async validateEmail( email) {
-        let rules = {
-            email: 'email|required'
-        }
+    const validation = await validate({ email }, rules);
 
-        let validation = await validate({ email }, rules);
+    if (validation.fails()) return false;
 
-        if (validation.fails())
-            return false;
+    return true;
+  }
 
-        return true;
-    }
+  async validateUsername(username) {
+    const rules = {
+      username: 'alpha_numeric',
+    };
 
-    async validateUsername(username) {
-        let rules = {
-            username: 'alpha_numeric',
-        }
+    const validation = await validate({ username }, rules);
 
-        let validation = await validate({ username }, rules);
+    if (validation.fails()) return false;
 
-        if (validation.fails())
-            return false;
-
-        return true;
-    }
-
-
+    return true;
+  }
 }
 
 module.exports = new User();
