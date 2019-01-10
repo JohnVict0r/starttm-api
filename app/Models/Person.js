@@ -2,16 +2,19 @@ const BaseModel = use('MongooseModel');
 const { Schema } = use('mongoose');
 const { Address } = use('App/Models/Schemes');
 
+const RefV = use('App/Validators/Ref');
+
 class Person extends BaseModel {
-  static boot({ schema }) {}
+  static boot() {}
 
   static get schema() {
     return {
       user: {
         type: Schema.Types.ObjectId,
-        required: true,
         unique: true,
+        required: true,
         ref: 'User',
+        validate: new RefV('User').validator,
       },
       name: {
         type: String,
@@ -19,8 +22,8 @@ class Person extends BaseModel {
       },
       sex: {
         type: String,
-        required: true,
         enum: ['MALE', 'FEMALE'],
+        required: true,
       },
       birth: {
         type: Date,
@@ -28,12 +31,13 @@ class Person extends BaseModel {
       },
       cpf: {
         type: String,
-        required: true,
         unique: true,
+        required: true,
       },
       rg: {
         type: String,
         unique: true,
+        required: true,
       },
       address: {
         type: Address,

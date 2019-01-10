@@ -1,5 +1,6 @@
 const BaseModel = use('MongooseModel');
 const { Schema } = use('Mongoose');
+const RefV = use('App/Validators/Ref');
 
 class Role extends BaseModel {
   static boot() {
@@ -11,6 +12,7 @@ class Role extends BaseModel {
       user: {
         type: Schema.Types.ObjectId,
         ref: 'User',
+        validate: new RefV('User').validator,
       },
       startDate: {
         type: Date,

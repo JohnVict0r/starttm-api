@@ -14,7 +14,8 @@ Route.resource('users', 'UserController').only(['show', 'index']);
 // People
 Route.resource('people', 'PersonController')
   .apiOnly()
-  .except(['destroy']);
+  .except(['destroy'])
+  .validator(new Map([[['person.store'], ['Person']]]));
 
 // Arbiter
 Route.resource('arbiters', 'ArbiterController')

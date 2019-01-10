@@ -1,10 +1,10 @@
 const Antl = use('Antl');
 
-class User {
+class Person {
   get rules() {
     return {
-      username: 'required',
-      email: 'required|email',
+      user: 'required',
+      name: 'required|alpha',
       password: 'required',
     };
   }
@@ -18,4 +18,4 @@ class User {
   }
 }
 
-module.exports = User;
+module.exports = Person;

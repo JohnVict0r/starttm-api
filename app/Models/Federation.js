@@ -1,6 +1,8 @@
 const BaseModel = use('MongooseModel');
-
 const { ufs } = use('App/Utils/Data/Address');
+
+const RefV = use('App/Validators/Ref');
+
 
 class Federation extends BaseModel {
   static boot() {

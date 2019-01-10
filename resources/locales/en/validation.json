@@ -43,5 +43,6 @@
   "string": "The {{field}} should be a STRING.",
   "under": "The {{field}} should be under {{argument.0}}.",
   "unique": "The {{field}} has already been taken by someone else.",
-  "url": "The {{field}} should be a valid url."
+  "url": "The {{field}} should be a valid url.",
+  "exist": "There is no { name } by id provided"
 }

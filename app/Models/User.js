@@ -2,7 +2,7 @@ const BaseModel = use('MongooseModel');
 const { Schema } = use('Mongoose');
 
 class User extends BaseModel {
-  static boot({ schema }) {
+  static boot() {
     this.addHook('preSave', 'UserHook.hashPassword');
   }
 

@@ -1,8 +1,10 @@
 const BaseModel = use('MongooseModel');
 const { Schema } = use('Mongoose');
 
+const RefV = use('App/Validators/Ref');
+
 class Arbiter extends BaseModel {
-  static boot({ schema }) {
+  static boot() {
     this.index({ user: 1 }, { background: true });
   }
 
@@ -13,6 +15,7 @@ class Arbiter extends BaseModel {
         required: true,
         unique: true,
         ref: 'User',
+        validate: new RefV('User').validator,
       },
       participations: {
         type: Number,
