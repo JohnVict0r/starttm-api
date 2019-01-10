@@ -1,29 +1,21 @@
-const { validate } = use('Validator');
+const Antl = use('Antl');
 
 class User {
-  async validateEmail(email) {
-    const rules = {
-      email: 'email|required',
+  get rules() {
+    return {
+      username: 'required',
+      email: 'required|email',
+      password: 'required|confirmed',
     };
+  }
 
-    const validation = await validate({ email }, rules);
-
-    if (validation.fails()) return false;
-
+  get validateAll() {
     return true;
   }
 
-  async validateUsername(username) {
-    const rules = {
-      username: 'alpha_numeric',
-    };
-
-    const validation = await validate({ username }, rules);
-
-    if (validation.fails()) return false;
-
-    return true;
+  get messages() {
+    return Antl.list('validation');
   }
 }
 
-module.exports = new User();
+module.exports = User;
