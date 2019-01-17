@@ -1,8 +1,6 @@
 const BaseModel = use('MongooseModel');
 const { Schema } = use('mongoose');
 
-const RefV = use('App/Validators/Ref');
-
 class Athlete extends BaseModel {
   static boot({ schema }) {}
 
@@ -13,7 +11,6 @@ class Athlete extends BaseModel {
         required: true,
         unique: true,
         ref: 'User',
-        validate: new RefV('User').validator,
       },
       rating: {
         type: Number,
@@ -23,6 +20,7 @@ class Athlete extends BaseModel {
         type: Schema.Types.ObjectId,
         ref: 'Federation',
       },
+      // tra
     };
   }
 }

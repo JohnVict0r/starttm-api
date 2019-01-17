@@ -1,13 +1,3 @@
-/*
-|--------------------------------------------------------------------------
-| Providers
-|--------------------------------------------------------------------------
-|
-| Providers are building blocks for your Adonis app. Anytime you install
-| a new Adonis specific package, chances are you will register the
-| provider here.
-|
-*/
 const providers = [
   '@adonisjs/framework/providers/AppProvider',
   '@adonisjs/auth/providers/AuthProvider',

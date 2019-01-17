@@ -1,8 +1,6 @@
 const BaseModel = use('MongooseModel');
 const { Schema } = use('Mongoose');
 
-const RefV = use('App/Validators/Ref');
-
 class Coach extends BaseModel {
   static boot({ schema }) {
     this.index({ user: 1 }, { background: true });
@@ -21,7 +19,6 @@ class Coach extends BaseModel {
         unique: true,
         required: true,
         ref: 'Club',
-        validate: new RefV('Club').validator,
       },
     };
   }

@@ -1,6 +1,5 @@
 const BaseModel = use('MongooseModel');
 const { Schema } = use('Mongoose');
-const RefV = use('App/Validators/Ref');
 
 class Club extends BaseModel {
   static boot({ schema }) {
@@ -19,19 +18,16 @@ class Club extends BaseModel {
         required: true,
         unique: true,
         ref: 'User',
-        validate: new RefV('User').validator,
       },
       eventManager: {
         type: Schema.Types.ObjectId,
         required: true,
         unique: true,
         ref: 'User',
-        validate: new RefV('User').validator,
       },
       federation: {
         type: Schema.Types.ObjectId,
         ref: 'Federation',
-        validate: new RefV('User').validator,
       },
     };
   }

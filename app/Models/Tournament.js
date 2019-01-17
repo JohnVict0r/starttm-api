@@ -1,6 +1,5 @@
 const BaseModel = use('MongooseModel');
 const { Schema } = use('Mongoose');
-const RefV = use('App/Validators/Ref');
 
 const {
   Period, Address, Price, Category,
@@ -38,27 +37,23 @@ class Tournament extends BaseModel {
         type: Schema.Types.ObjectId,
         ref: 'Federation',
         required: true,
-        validate: new RefV('Federation').validator,
       },
       athletes: [
         {
           type: Schema.Types.ObjectId,
           ref: 'Athlete',
-          validate: new RefV('Athlete').validator,
         },
       ],
       coaches: [
         {
           type: Schema.Types.ObjectId,
           ref: 'Coach',
-          validate: new RefV('Coach').validator,
         },
       ],
       arbiters: [
         {
           type: Schema.Types.ObjectId,
           ref: 'Arbiter',
-          validate: new RefV('Arbiter').validator,
         },
       ],
     };
