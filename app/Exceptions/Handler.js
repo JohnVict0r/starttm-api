@@ -1,7 +1,7 @@
 const BaseExceptionHandler = use('BaseExceptionHandler');
 
 const Env = use('Env');
-const Youch = use('Youch');
+const Youch = require('youch');
 
 class ExceptionHandler extends BaseExceptionHandler {
   async handle(error, { request, response }) {
@@ -14,7 +14,7 @@ class ExceptionHandler extends BaseExceptionHandler {
     return response.status(error.status).send(error.message);
   }
 
-  async report(error, { request }) {}
+  async report(error, { request }) { }
 }
 
 module.exports = ExceptionHandler;
