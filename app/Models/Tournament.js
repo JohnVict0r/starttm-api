@@ -5,39 +5,21 @@ const {
   Period, Address, Price, Category,
 } = use('App/Models/Schemes');
 
+const { entries } = use('App/Utils/Data/Tournament');
+
 class Tournament extends BaseModel {
   static boot() {}
 
   static get schema() {
     return {
-      title: {
-        type: String,
-        required: true,
-      },
-      type: {
-        type: String,
-        required: true,
-      },
-      price: {
-        type: Price,
-        required: true,
-      },
-      date: {
-        type: Period,
-        required: true,
-      },
-      address: {
-        type: Address,
-        required: true,
-      },
-      categories: {
-        type: [Category],
-      },
-      federation: {
-        type: Schema.Types.ObjectId,
-        ref: 'Federation',
-        required: true,
-      },
+      title: { type: String, required: true },
+      type: { type: String, required: true },
+      entries: { type: [String], required: true, enum: entries },
+      price: { type: Price, required: true },
+      date: { type: Period, required: true },
+      address: { type: Address, required: true },
+      categories: { type: [Category] },
+      federation: { type: Schema.Types.ObjectId, ref: 'Federation', required: true },
       athletes: [
         {
           type: Schema.Types.ObjectId,

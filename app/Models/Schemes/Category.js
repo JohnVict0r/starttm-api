@@ -32,25 +32,6 @@ const Ranking = new Schema({
   },
 });
 
-const Section = new Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  rating: {
-    type: [Rating],
-    unique: true,
-    sparse: true,
-    default: undefined,
-  },
-  ranking: {
-    type: [Ranking],
-    unique: true,
-    sparse: true,
-    default: undefined,
-  },
-});
-
 const Category = new Schema({
   name: {
     type: String,
@@ -60,8 +41,12 @@ const Category = new Schema({
     type: String,
     required: true,
   },
-  sections: {
-    type: [Section],
+  ranking: {
+    type: [Ranking],
+    required: true,
+  },
+  rating: {
+    type: [Rating],
     required: true,
   },
 });

@@ -1,0 +1,7 @@
+module.exports = [
+  'RANKING',
+  'RATING',
+  'RANKING_RATING',
+  'RANKING_RANKING',
+  'RANKING_RANKING_RATING',
+];
