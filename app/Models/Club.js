@@ -1,5 +1,6 @@
 const BaseModel = use('MongooseModel');
 const { Schema } = use('Mongoose');
+const { Address } = use('App/Models/Schemes');
 
 class Club extends BaseModel {
   static boot({ schema }) {
@@ -29,6 +30,13 @@ class Club extends BaseModel {
         type: Schema.Types.ObjectId,
         ref: 'Federation',
       },
+      address: {
+        type: Address,
+        required: true,
+      },
+      traCbtmPaid: {
+        type: [Number], // Lista de Anos referentes as TRA-CBTM pagas
+      }
     };
   }
 }

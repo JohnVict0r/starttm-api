@@ -21,7 +21,6 @@ const Address = new Schema(
     },
     complement: {
       type: String,
-      required: false,
     },
     city: {
       type: String,

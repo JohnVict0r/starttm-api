@@ -22,6 +22,9 @@ class Federation extends BaseModel {
         type: String,
         required: true,
       },
+      pictureUrl: {
+        type: String,
+      }
     };
   }
 }

@@ -23,7 +23,12 @@ class ClubController {
   }
 
   async store({ request, response }) {
-    const data = request.all();
+    let data = request.all();
+    // Quem criar o club deve ser setado como manager.
+    // Verificar se a atribuição deve ser feita aqui, 
+    // ou no client web, ja que la tenho o usuario em sessão...
+    // data.manager = currentUser.id; 
+
     await Club.create(data);
     response.send({ message: 'The resource has been created' }, 201);
   }

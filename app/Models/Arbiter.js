@@ -18,6 +18,9 @@ class Arbiter extends BaseModel {
         type: Number,
         min: 0,
       },
+      traCbtmPaid: {
+        type: [Number], // Lista de Anos referentes as TRA-CBTM pagas
+      }
     };
   }
 }
