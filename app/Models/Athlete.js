@@ -2,7 +2,7 @@ const BaseModel = use('MongooseModel');
 const { Schema } = use('mongoose');
 
 class Athlete extends BaseModel {
-  static boot({ schema }) {}
+  static boot({ schema }) { }
 
   static get schema() {
     return {
@@ -20,7 +20,9 @@ class Athlete extends BaseModel {
         type: Schema.Types.ObjectId,
         ref: 'Federation',
       },
-      // tra
+      traCbtmPaid: {
+        type: [Number], // Lista de Anos referentes as TRA-CBTM pagas
+      }
     };
   }
 }
